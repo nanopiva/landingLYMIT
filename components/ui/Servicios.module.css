@@ -1,0 +1,127 @@
+/* Contenedor principal */
+.sectionContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- PARTE 1: INTRODUCCIÓN PANTALLA COMPLETA --- */
+.introScreen {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0e0e0c; /* Mismo tono oscuro que tu botón CTA */
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  position: relative;
+}
+
+.introContent {
+  text-align: center;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.label {
+  font-family: var(--inter), sans-serif;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+
+.introContent h2 {
+  font-family: var(--apple-garamond), serif;
+  font-size: clamp(4rem, 8vw, 7rem); /* Responsive typography */
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.introContent p {
+  font-family: var(--inter), sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  max-width: 500px;
+  color: #a1a1a1; /* Gris suave para subtitulo */
+  text-wrap: balance;
+}
+
+/* --- PARTE 2: GRILLA DE SERVICIOS --- */
+.servicesGridContainer {
+  background-color: var(--background, #fafafa); /* Vuelta al claro */
+  padding: 120px 24px;
+  color: #000;
+}
+
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 Columnas */
+  gap: 1px; /* Espacio para simular bordes */
+  background-color: #e5e5e5; /* Color de las líneas de la grilla */
+  border: 1px solid #e5e5e5;
+}
+
+.card {
+  background-color: #fff;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  min-height: 320px;
+  transition: background-color 0.3s ease;
+}
+
+.card:hover {
+  background-color: #fcfcfc;
+}
+
+.cardNumber {
+  font-family: var(--inter), sans-serif;
+  font-size: 0.875rem;
+  color: #999;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardContent h3 {
+  font-family: var(--apple-garamond), serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.cardContent p {
+  font-family: var(--inter), sans-serif;
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+  max-width: 300px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .introScreen {
+    padding: 100px 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr; /* 1 Columna en móvil */
+  }
+
+  .cardContent h3 {
+    font-size: 2rem;
+  }
+}

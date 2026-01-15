@@ -1,0 +1,22 @@
+/* Contenedor principal de la Home */
+.page {
+  display: block; /* Flujo normal */
+  width: 100%;
+  position: relative;
+  /* IMPORTANTE: No pongas overflow aquí. Deja que el body se encargue. */
+  /* background-color: var(--background); <-- Ya lo maneja el body, pero puedes dejarlo */
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 160px 60px 120px 60px;
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 48px 24px;
+  }
+}

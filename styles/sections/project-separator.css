@@ -1,0 +1,65 @@
+/* Contenedor principal del separador interactivo */
+.project_separator {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Altura completa para que haya espacio para jugar */
+  background-color: #0e0e0c; /* Tu color oscuro corporativo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Importante para que las imágenes no se salgan de la sección */
+  cursor: default;
+}
+
+/* El contenido de texto (título y bajada) */
+.project_separator_content {
+  position: relative;
+  z-index: 20; /* Por encima de las imágenes */
+  text-align: center;
+  pointer-events: none; /* Permite que el mouse pase a través del texto */
+  mix-blend-mode: difference; /* Efecto cool: invierte color sobre las imágenes */
+  color: #fff;
+  padding: 0 20px;
+}
+
+.project_separator h2 {
+  font-family: var(--apple-garamond), serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.project_separator p {
+  font-family: var(--inter), sans-serif;
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* --- LAS IMÁGENES DEL TRAIL --- */
+.trail_image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px; /* Tamaño de la imagen flotante */
+  height: 260px; /* Formato vertical tipo poster */
+  object-fit: cover;
+  border-radius: 8px; /* Un poco de borde redondeado */
+
+  /* Estado inicial: invisible y pequeño */
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+
+  /* Transición suave */
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+
+  pointer-events: none; /* CRÍTICO: el mouse no debe detectar la imagen o parpadeará */
+  z-index: 10;
+}
+
+/* Estado Activo (cuando el JS lo marca) */
+.trail_image[data-status="active"] {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}

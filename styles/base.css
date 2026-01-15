@@ -1,0 +1,60 @@
+:root {
+  /* Restauramos tus colores claros originales */
+  --background: #fafafa;
+  --foreground: #fff;
+  --text-primary: #000;
+  --text-secondary: #666;
+
+  /* Variables de fuentes (ya las tienes, pero por si acaso) */
+  --font-geist-sans: var(--inter);
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  /* AQUÍ CONTROLAMOS EL DESBORDE GLOBALMENTE */
+  overflow-x: clip;
+
+  /* Forzamos el color de fondo base */
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+button:hover {
+  filter: brightness(140%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Soporte Dark Mode (Opcional: Si quieres que respete el sistema, descomenta esto)
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000;
+    --foreground: #000;
+    --text-primary: #ededed;
+    --text-secondary: #999;
+  }
+}
+*/

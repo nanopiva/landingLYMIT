@@ -1,0 +1,136 @@
+/* --- WRAPPER FIJO --- */
+.navbar_fixed_wrapper {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  padding: 0 20px;
+  pointer-events: none;
+}
+
+/* --- LA PÍLDORA (Navbar) --- */
+.navbar_pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* Dimensiones Ajustadas */
+  width: 100%;
+  /* Reducido de 500px a 400px ya que no hay botón CTA */
+  max-width: 400px;
+  height: 54px;
+
+  /* CAMBIO: Padding simétrico ahora que no hay botón */
+  padding: 5px 30px;
+
+  /* Estética Cristal */
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 100px;
+
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02),
+    0 10px 15px -3px rgba(0, 0, 0, 0.03);
+
+  transition: all 0.3s ease;
+}
+
+.navbar_pill.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* --- ELEMENTOS --- */
+
+.nav_logo_wrapper {
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center;
+  margin-right: auto;
+  height: 100%; /* Ocupa toda la altura del navbar */
+  text-decoration: none;
+
+  /* Opcional: Si sientes que está muy pegado al borde izquierdo, dale un margen */
+  /* margin-left: 5px; */
+}
+
+/* La Imagen del Logo */
+.nav_logo_img {
+  /* TU NAVBAR MIDE 54px TOTALES. */
+  /* Tiene padding de 5px arriba y abajo. */
+  /* Espacio libre real = 44px. */
+
+  /* 1. TAMAÑO: Lo ponemos casi al máximo posible */
+  height: 72px;
+  width: auto;
+
+  /* 2. COMPORTAMIENTO */
+  display: block; /* Elimina espacios fantasmas de inline elements */
+  object-fit: contain;
+
+  /* 3. ALINEACIÓN MANUAL (Ajuste Fino) */
+  /* Si sientes que se ve "arriba", esto lo empuja píxeles hacia abajo */
+  /* Prueba con 1px, 2px o 3px hasta que tu ojo lo vea perfecto */
+  transform: translateY(5px);
+}
+
+.nav_logo_wrapper:hover .nav_logo_img {
+  /* IMPORTANTE: Mantenemos el translateY(2px) y agregamos la escala */
+  transform: translateY(5px) scale(1.1);
+
+  /* Sombra sutil para dar efecto de elevación */
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+
+  /* Si usaste opacidad antes, aquí la restauras */
+  /* opacity: 1; */
+}
+
+/* ESTADO CLICK (Active) - Pequeño rebote al hacer click */
+.nav_logo_wrapper:active .nav_logo_img {
+  transform: translateY(2px) scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.nav_links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  /* Eliminamos márgenes extra innecesarios */
+}
+
+.nav_link {
+  font-family: var(--inter), sans-serif;
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.nav_link:hover {
+  color: #000;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .navbar_pill {
+    max-width: 90vw;
+    padding: 5px 24px;
+  }
+
+  /* Opcional: En móvil quizás quieras mostrar solo el logo o un menú hamburguesa si hay muchos links */
+  .nav_links {
+    gap: 16px;
+  }
+
+  .nav_link {
+    font-size: 0.8rem;
+  }
+}

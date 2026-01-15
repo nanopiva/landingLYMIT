@@ -1,0 +1,16 @@
+@import url("fonts.css");
+@import url("base.css");
+
+/* Páginas */
+@import url("pages/landing.css");
+@import url("pages/home.css"); /* <--- AGREGADO */
+
+/* Secciones */
+@import url("sections/navbar.css");
+@import url("sections/separators.css");
+@import url("sections/services.css");
+@import url("sections/project-separator.css");
+@import url("sections/projects.css");
+@import url("sections/contact.css");
+@import url("sections/footer.css");
+@import url("sections/legal.css");

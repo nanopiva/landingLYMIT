@@ -1,0 +1,190 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+.projects_main_container {
+  background-color: var(--background);
+  position: relative;
+  width: 100%;
+  /* Menos padding abajo ya que las cards son enormes */
+  padding-bottom: 5vh;
+}
+
+/* --- WRAPPER STICKY --- */
+.card_sticky_wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+}
+
+/* --- TARJETA ANIMADA (GIGANTE) --- */
+.card_inner_motion {
+  position: relative;
+  /* Centrado natural */
+  top: 0;
+
+  /* DIMENSIONES AUMENTADAS */
+  width: 1600px; /* Base ancha */
+  max-width: 95vw; /* Ocupa casi todo el ancho en cualquier pantalla */
+  height: 75vh; /* Ocupa 3/4 de la altura de la pantalla */
+
+  border-radius: 12px;
+  padding: 0;
+
+  transform-origin: top;
+  overflow: hidden;
+
+  /* Sombra más amplia para soportar el tamaño */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- GRID LAYOUT --- */
+.card_content_grid {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+/* --- COLUMNA TEXTO --- */
+.card_text_column {
+  width: 35%; /* Reducimos un poco el texto para darle más aire a la imagen si quieres, o 40% */
+  padding: 80px 60px; /* Padding generoso */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrado vertical del contenido */
+  gap: 40px;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.card_header_text {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card_category_label {
+  font-family: var(--inter), sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #999;
+  font-weight: 600;
+}
+
+.card_title_desktop {
+  font-family: var(--apple-garamond), serif;
+  font-size: 4rem; /* Título más grande */
+  line-height: 1;
+  margin: 0;
+  color: #000;
+}
+
+.card_title_mobile {
+  display: none;
+}
+
+.card_description {
+  font-family: var(--inter), sans-serif;
+  font-size: 1.25rem; /* Texto más grande para lectura cómoda */
+  line-height: 1.6;
+  color: #444;
+  text-wrap: pretty;
+}
+
+/* Tags */
+.card_tags_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.card_tag {
+  font-family: var(--inter), sans-serif;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 100px;
+  color: #333;
+  background-color: #fafafa;
+}
+
+/* --- COLUMNA IMAGEN --- */
+.card_image_column {
+  width: 65%; /* Imagen domina */
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.card_image_inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.card_img {
+  object-fit: cover;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1280px) {
+  /* Ajuste para laptops */
+  .card_text_column {
+    padding: 50px 40px;
+    width: 40%;
+  }
+  .card_image_column {
+    width: 60%;
+  }
+  .card_title_desktop {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Ajuste Tablet/Móvil: Volvemos a apilar vertical */
+  .card_inner_motion {
+    height: 80vh; /* Aún más alto en móvil */
+    width: 95vw;
+  }
+
+  .card_content_grid {
+    flex-direction: column-reverse;
+  }
+
+  .card_text_column {
+    width: 100%;
+    height: auto;
+    padding: 30px;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+
+  .card_image_column {
+    width: 100%;
+    height: 50%;
+    flex: 1;
+  }
+
+  .card_title_desktop {
+    display: none;
+  }
+
+  .card_title_mobile {
+    display: block;
+    font-family: var(--apple-garamond), serif;
+    font-size: 2.5rem;
+    color: #000;
+    margin: 20px 0 10px 30px; /* Alineado con el padding del texto */
+  }
+
+  .card_description {
+    font-size: 1rem;
+  }
+}

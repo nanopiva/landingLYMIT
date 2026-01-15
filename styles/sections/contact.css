@@ -1,0 +1,294 @@
+/* --- SECCIÓN PRINCIPAL --- */
+.contact_section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Padding vertical generoso para que respire */
+  padding: 120px 0;
+}
+
+.contact_container {
+  width: 100%;
+  /* CAMBIO: Ancho grande, igual que Projects */
+  max-width: 95vw;
+  /* Mantenemos un límite lógico para pantallas ultrawide */
+  width: 1600px;
+
+  display: grid;
+  /* Ajusté un poco la proporción para dar más aire al formulario */
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 100px; /* Más separación entre columnas */
+  align-items: stretch; /* Estira ambas columnas para que midan lo mismo de alto */
+  padding: 0 20px;
+}
+
+/* --- COLUMNA INFORMACIÓN --- */
+.contact_info_col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrado vertical del contenido */
+}
+
+.contact_header {
+  margin-bottom: 4rem;
+}
+
+/* ... (Títulos y Subtítulos se mantienen igual) ... */
+.contact_subtitle {
+  font-family: var(--inter), sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #999;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.contact_title {
+  font-family: var(--apple-garamond), serif;
+  font-size: clamp(3rem, 5vw, 4.5rem); /* Título un poco más grande */
+  line-height: 1;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+.contact_description {
+  font-family: var(--inter), sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #666;
+  max-width: 500px;
+}
+
+/* Detalles de contacto */
+.contact_details {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem; /* Más espacio entre items */
+}
+
+.detail_item {
+  display: flex;
+  gap: 25px; /* Más espacio entre icono y texto */
+  align-items: flex-start;
+}
+
+.icon_circle {
+  width: 50px; /* Circulo un poco más grande */
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f5f5f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  flex-shrink: 0;
+}
+
+.detail_text_wrapper {
+  display: flex;
+  flex-direction: column;
+  /* Esto ayuda a que el titulo no pegue con los numeros */
+}
+
+.detail_item h3 {
+  font-family: var(--inter), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #000;
+  /* CAMBIO: Más espacio abajo del título "WhatsApp" */
+  margin-bottom: 12px;
+}
+
+.detail_item p,
+.detail_link {
+  font-family: var(--inter), sans-serif;
+  font-size: 1.1rem; /* Texto un poco más grande */
+  color: #555;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.detail_link:hover {
+  color: #000;
+}
+
+.detail_note {
+  font-size: 0.9rem;
+  color: #999;
+  margin-top: 5px;
+}
+
+.phones_grid {
+  display: flex;
+  flex-direction: column;
+  /* CAMBIO: Más espacio entre los números */
+  gap: 8px;
+}
+
+/* --- COLUMNA FORMULARIO --- */
+.contact_form_col {
+  background-color: #fff;
+  padding: 60px;
+  border-radius: 20px;
+  /* Sombra más amplia para el ancho grande */
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.actual_form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  height: 100%; /* Ocupa toda la altura disponible */
+}
+
+/* Footer del form (Botón) */
+.form_footer {
+  /* CAMBIO: Empuja el botón hacia abajo para alinear visualmente */
+  margin-top: auto;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Alineado a la izquierda, no centrado */
+}
+
+/* ... (Inputs animados se mantienen igual) ... */
+.input_group {
+  position: relative;
+  padding-top: 15px;
+}
+.form_input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-family: var(--inter), sans-serif;
+  font-size: 1.2rem;
+  color: #000;
+  padding: 12px 0;
+  outline: none;
+  resize: none;
+}
+.textarea {
+  min-height: 150px; /* Textarea más alto */
+}
+.floating_label {
+  position: absolute;
+  left: 0;
+  top: 25px;
+  font-family: var(--inter), sans-serif;
+  font-size: 1.1rem;
+  color: #999;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.input_group.active .floating_label {
+  top: -5px;
+  font-size: 0.85rem;
+  color: #000;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.input_border_base {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e5e5e5;
+}
+.input_border_active {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  transform-origin: left;
+}
+
+/* --- BOTÓN SUBMIT --- */
+.submit_btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 20px 40px; /* Botón más grande */
+  border-radius: 100px;
+  font-family: var(--inter), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.submit_btn:hover {
+  background-color: #222;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.submit_btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error_msg {
+  color: #e00;
+  font-size: 0.9rem;
+  font-family: var(--inter);
+  margin-top: 15px;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+  .contact_container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .contact_form_col {
+    padding: 30px;
+  }
+
+  .contact_info_col {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact_details {
+    align-items: center;
+    text-align: left; /* Detalles alineados a la izq interna */
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .detail_item {
+    width: 100%;
+  }
+
+  .form_footer {
+    align-items: center; /* En móvil centramos el botón */
+    margin-top: 2rem;
+  }
+
+  .submit_btn {
+    width: 100%; /* Botón ancho completo en móvil */
+  }
+}
