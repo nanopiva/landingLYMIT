@@ -1,8 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { MapPin, Mail, Send, User, MessageSquare, AtSign } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // --- VARIANTES DE ANIMACIÓN ---
 const containerVariants: Variants = {
@@ -37,6 +41,8 @@ const iconHoverVariants: Variants = {
 };
 
 export default function Contact() {
+  const sectionRef = useRef<HTMLElement>(null);
+
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -46,8 +52,28 @@ export default function Contact() {
     "idle" | "loading" | "success" | "error"
   >("idle");
 
+  // --- LÓGICA DE STICKY SCROLL (GSAP) ---
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: section,
+        pin: true,
+        start: "top top",
+        end: "+=50%",
+        scrub: true,
+        anticipatePin: 1,
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // --- LÓGICA DE FORMULARIO ---
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
@@ -55,26 +81,26 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-
-    // --- MODO SIMULACIÓN (SIN BACKEND) ---
-    // Simulamos una espera de 2 segundos para que se vea la animación
     setTimeout(() => {
       setStatus("success");
-      setFormState({ name: "", email: "", message: "" }); // Limpiar form
-
-      // Volver al estado inicial después de 3 segundos
+      setFormState({ name: "", email: "", message: "" });
       setTimeout(() => setStatus("idle"), 3000);
     }, 2000);
   };
 
   return (
-    <section className="contact_section">
+    <section
+      ref={sectionRef}
+      className="contact_section"
+      style={{ position: "relative", zIndex: 10 }}
+    >
       <motion.div
         className="contact_container"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        // CAMBIO: once: false para que se repita siempre
+        viewport={{ once: false, amount: 0.3 }}
       >
         {/* COLUMNA IZQUIERDA: INFORMACIÓN */}
         <div className="contact_info_col">
@@ -251,7 +277,6 @@ export default function Contact() {
 }
 
 // --- SUBCOMPONENTES ---
-
 function WhatsAppIcon() {
   return (
     <svg
@@ -277,7 +302,7 @@ interface InputProps {
   type: string;
   value: string;
   onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   icon: React.ReactNode;
 }
@@ -298,7 +323,8 @@ function FloatingInput({
       className={`input_group ${isFocused || hasValue ? "active" : ""}`}
       initial={{ opacity: 0, x: -10 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
+      // CAMBIO: once: false para los inputs también
+      viewport={{ once: false }}
       transition={{ duration: 0.5 }}
     >
       <label htmlFor={name} className="floating_label">

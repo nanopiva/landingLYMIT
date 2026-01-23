@@ -40,8 +40,8 @@ export default function Navbar() {
           <Link href="#servicios" className="nav_link">
             Servicios
           </Link>
-          <Link href="#proyectos" className="nav_link">
-            Proyectos
+          <Link href="#trabajos" className="nav_link">
+            Trabajos
           </Link>
           <Link href="#contacto" className="nav_link">
             Contacto

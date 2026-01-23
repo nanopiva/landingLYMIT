@@ -28,7 +28,7 @@ const projects = [
     title: "Koble Consultoría",
     category: "Identidad Digital",
     description:
-      "Para Koble, la imagen lo es todo. Diseñamos un sitio que proyecta seriedad desde el primer momento, ayudándoles a pararse como líderes en su industria sin necesidad de gritarlo.",
+      "Con Koble el objetivo fue claro: crear una página que transmita seguridad. Diseñamos un sitio profesional y ordenado que refleja la seriedad de su asesoramiento, ayudándoles a conectar mejor con sus clientes desde el primer contacto.",
     src: "/project-4.jpeg",
     color: "#ffffff",
     tags: ["Corporativo", "Branding", "Estrategia"],

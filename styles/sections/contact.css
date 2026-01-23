@@ -7,8 +7,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Padding vertical generoso para que respire */
-  padding: 120px 0;
 }
 
 .contact_container {
@@ -16,11 +14,11 @@
   /* CAMBIO: Ancho grande, igual que Projects */
   max-width: 95vw;
   /* Mantenemos un límite lógico para pantallas ultrawide */
-  width: 1600px;
+  width: 1300px;
 
   display: grid;
   /* Ajusté un poco la proporción para dar más aire al formulario */
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: 1fr 1fr;
   gap: 100px; /* Más separación entre columnas */
   align-items: stretch; /* Estira ambas columnas para que midan lo mismo de alto */
   padding: 0 20px;
@@ -231,7 +229,9 @@
   justify-content: center;
   gap: 12px;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
 }
 
 .submit_btn:hover {

@@ -10,19 +10,19 @@ gsap.registerPlugin(ScrollTrigger);
 const services = [
   {
     id: "01",
-    title: "Experiencias Web",
+    title: "Páginas Web",
     // Cambio: Directo al grano. Velocidad + Diseño + Conversión.
     description:
-      "Hacemos sitios web rápidos y con buen diseño. No es solo estética, es crear una página clara que ayude a que tus visitas se conviertan en clientes.",
+      "La primera impresión de tu negocio entra por los ojos. Diseñamos sitios web elegantes y fáciles de navegar que reflejan la calidad de tu trabajo y generan la confianza necesaria para que te elijan.",
     tags: ["Landing Pages", "Sitios Corporativos", "3D WebGL", "SEO Técnico"],
     image: "/modern-web.jpg",
   },
   {
     id: "02",
-    title: "Comercio Digital",
+    title: "E-commerce",
     // Cambio: Enfoque en "que funcione y venda" sin tecnicismos.
     description:
-      "Te armamos la tienda online completa. Configuramos los pagos, el carrito y nos aseguramos de que todo funcione fluido para que no pierdas ventas por errores técnicos.",
+      "Creamos una experiencia de compra fluida desde el primer clic hasta el pago final. Implementamos pasarelas seguras y sistemas de gestión que te permiten administrar tus ventas de forma simple, garantizando que el proceso sea profesional tanto para vos como para tu cliente.",
     tags: [
       "E-commerce",
       "Shopify Experts",
@@ -36,7 +36,7 @@ const services = [
     title: "Automatización & IA",
     // Cambio: Explicación simple de para qué sirve la IA (ahorrar tiempo).
     description:
-      "Ahorrá tiempo usando inteligencia artificial. Configuramos chatbots que responden solos a tus clientes y automatizamos esas tareas repetitivas que hoy haces a mano.",
+      "Optimizamos tu día a día eliminando el trabajo administrativo pesado. A través de soluciones inteligentes, logramos que tus procesos sean más rápidos y eficientes, liberando horas de trabajo que hoy se pierden en tareas que pueden hacerse solas.",
     tags: [
       "Agentes IA",
       "n8n Workflows",
@@ -50,7 +50,7 @@ const services = [
     title: "Software a Medida",
     // Cambio: Problema (lo comercial no sirve) -> Solución (lo hacemos nosotros).
     description:
-      "A veces las herramientas del mercado no alcanzan. Creamos el software exacto que tu negocio necesita para organizarse y crecer, hecho 100% a tu medida.",
+      "Cuando las soluciones estándar no se ajustan a tu forma de trabajar, desarrollamos herramientas que sí lo hacen. Creamos software diseñado específicamente para tus procesos internos, asegurando que la tecnología se adapte a tu negocio.",
     tags: [
       "SaaS Development",
       "Web Apps",
@@ -104,13 +104,13 @@ export default function Servicios() {
               scale: 0.95,
               opacity: 1,
             },
-            `step-${index}`
+            `step-${index}`,
           ).to(
             cards[index + 1],
             {
               yPercent: 0,
             },
-            `step-${index}`
+            `step-${index}`,
           );
         }
       });

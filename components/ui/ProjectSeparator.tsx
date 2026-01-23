@@ -90,8 +90,8 @@ export default function ProjectSeparator({ id }: SeparatorProps) {
       <article className="project_separator_content">
         <h2>Nuestros Trabajos</h2>
         <p>
-          Explora una selección de proyectos donde la ingeniería de software y
-          la estrategia digital convergen. <br />
+          Una muestra de los desafíos que hemos resuelto, ayudando a negocios y
+          profesionales a mejorar su operativa a través de la tecnología. <br />
         </p>
       </article>
     </section>
