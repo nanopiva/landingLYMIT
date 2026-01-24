@@ -1,6 +1,7 @@
 "use client";
 
 import { Instagram } from "lucide-react";
+import Link from "next/link"; // Importamos Link
 import LYMITLogo from "@/public/LYMITWhite.svg";
 
 export default function Footer() {
@@ -11,15 +12,16 @@ export default function Footer() {
       <div className="footer_container">
         {/* PARTE SUPERIOR */}
         <div className="footer_top">
-          {/* MARCA + LOGO + LEMA (CENTRADOS) */}
+          {/* MARCA + LOGO + LEMA */}
           <div className="footer_brand">
-            <div className="logo_wrapper">
+            {/* CORRECCIÓN: Envolvemos el div del logo en un Link hacia #hero */}
+            <Link href="/#hero" className="logo_wrapper">
               <img
                 src={LYMITLogo.src}
                 alt="LYMIT Logo"
                 className="footer_logo_img"
               />
-            </div>
+            </Link>
             <p className="brand_tagline">Elevando estándares digitales.</p>
           </div>
 
@@ -28,9 +30,9 @@ export default function Footer() {
             <FooterColumn
               title="Explorar"
               links={[
-                { name: "Inicio", href: "#hero" },
+                { name: "Inicio", href: "#hero" }, // Ya estaba bien
                 { name: "Servicios", href: "#servicios" },
-                { name: "Proyectos", href: "#proyectos" },
+                { name: "Proyectos", href: "#trabajos" }, // Ajustado a #trabajos por consistencia
                 { name: "Contacto", href: "#contacto" },
               ]}
             />

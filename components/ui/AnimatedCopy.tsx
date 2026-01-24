@@ -12,12 +12,6 @@ interface AnimatedCopyProps {
   colorInitial?: string;
   colorAccent?: string;
   colorFinal?: string;
-  /**
-   * Define en qué punto del viewport termina la animación.
-   * Ejemplos: "top 60%", "bottom 80%", "+=200".
-   * Un valor más alto (ej. "top 80%") hace la animación más rápida (menos scroll).
-   * Un valor más bajo (ej. "top 20%") hace la animación más lenta (más scroll).
-   */
   triggerEnd?: string;
 }
 
@@ -28,10 +22,10 @@ interface SplitRefObject {
 
 export default function AnimatedCopy({
   children,
-  colorInitial = "#dddddd",
+  colorInitial = "#dddddd", // OJO: Para fondo blanco, quizás quieras un gris claro por defecto
   colorAccent = "#5271ff",
   colorFinal = "#000000",
-  triggerEnd = "top 70%", // Hice este valor mucho más agresivo (antes top 40%)
+  triggerEnd = "bottom 60%", // CAMBIO: "bottom" da más margen que "top"
 }: AnimatedCopyProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const splitRefs = useRef<SplitRefObject[]>([]);
@@ -76,7 +70,7 @@ export default function AnimatedCopy({
       });
 
       const allChars = splitRefs.current.flatMap(
-        ({ charSplit }) => charSplit.chars
+        ({ charSplit }) => charSplit.chars,
       );
       gsap.set(allChars, { color: colorInitial });
 
@@ -110,6 +104,7 @@ export default function AnimatedCopy({
         start: "top 90%",
         end: triggerEnd, // Usamos la prop dinámica
         scrub: 1,
+        refreshPriority: -1,
         onUpdate: (self) => {
           const progress = self.progress;
           const totalChars = allChars.length;
@@ -166,7 +161,7 @@ export default function AnimatedCopy({
     {
       scope: containerRef,
       dependencies: [colorInitial, colorAccent, colorFinal, triggerEnd],
-    }
+    },
   );
 
   if (React.Children.count(children) === 1) {

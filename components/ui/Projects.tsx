@@ -132,9 +132,8 @@ const Card: React.FC<CardProps> = ({
 
               <h2 className="card_title_desktop">{title}</h2>
             </div>
-            <AnimatedCopy>
-              <p className="card_description">{description}</p>
-            </AnimatedCopy>
+
+            <p className="card_description">{description}</p>
 
             <div className="card_tags_container">
               {tags.map((tag, index) => (

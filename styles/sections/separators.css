@@ -8,19 +8,14 @@
   text-align: center;
   width: 100%;
 
-  /* CAMBIO CRÍTICO: 100vh exactos. 
-     Esto asegura que el "Snap" aterrice perfectamente llenando la pantalla. */
-  height: 100vh;
+  /* CAMBIO: 105vh como pediste. Da un respiro extra. */
+  height: 110vh;
 
   background-color: #0e0e0c;
   color: #ffffff;
   padding: 0 20px;
   position: relative;
   z-index: 10;
-
-  /* Scroll snap para transición suave */
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .separator_content {

@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import AnimatedCopy from "./AnimatedCopy";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,7 +71,6 @@ export default function Servicios() {
     if (!wrapper || cards.length === 0) return;
 
     const ctx = gsap.context(() => {
-      // 1. Configuración inicial
       gsap.set(cards, { zIndex: (i) => i + 1 });
       cards.forEach((card, index) => {
         if (index !== 0) {
@@ -80,36 +78,31 @@ export default function Servicios() {
         }
       });
 
-      // 2. Definimos la duración lógica
-      const scrollDistance = (cards.length - 1) * 100;
+      // CAMBIO: Redujimos el multiplicador de 100 a 60.
+      // Esto hace que tengas que scrollear mucho menos para pasar las cards.
+      const scrollDistance = (cards.length - 1) * 60;
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapper,
           pin: true,
           start: "top top",
+          // Mantenemos el scrub para fluidez
           end: `+=${scrollDistance}%`,
           scrub: 0.5,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          refreshPriority: 10,
         },
-        defaults: { ease: "none" },
+        defaults: { ease: "none" }, // Linear para control total
       });
 
+      // ... resto de la lógica de animación igual ...
       cards.forEach((card, index) => {
         if (index < cards.length - 1) {
-          tl.to(
-            card,
-            {
-              scale: 0.95,
-              opacity: 1,
-            },
-            `step-${index}`,
-          ).to(
+          tl.to(card, { scale: 0.95, opacity: 1 }, `step-${index}`).to(
             cards[index + 1],
-            {
-              yPercent: 0,
-            },
+            { yPercent: 0 },
             `step-${index}`,
           );
         }
@@ -133,9 +126,7 @@ export default function Servicios() {
             <span className="service_number">{service.id} — Servicios</span>
             <h3 className="service_title">{service.title}</h3>
 
-            <AnimatedCopy>
-              <p className="service_description">{service.description}</p>
-            </AnimatedCopy>
+            <p className="service_description">{service.description}</p>
 
             <div className="service_features">
               {service.tags.map((tag) => (

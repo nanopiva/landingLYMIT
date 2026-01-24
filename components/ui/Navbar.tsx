@@ -30,12 +30,12 @@ export default function Navbar() {
       transition={{ duration: 0.35, ease: "easeInOut" }}
     >
       <nav className={`navbar_pill ${scrolled ? "scrolled" : ""}`}>
-        {/* LOGO WRAPPER */}
-        <Link href="/" className="nav_logo_wrapper">
+        {/* LOGO WRAPPER: Ahora apunta específicamente al #hero */}
+        <Link href="/#hero" className="nav_logo_wrapper">
           <img src={LYMITLogo.src} alt="LYMIT" className="nav_logo_img" />
         </Link>
 
-        {/* ENLACES */}
+        {/* ENLACES: Están perfectos, apuntan a los ID correctos */}
         <div className="nav_links">
           <Link href="#servicios" className="nav_link">
             Servicios

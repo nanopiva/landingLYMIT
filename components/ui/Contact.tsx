@@ -1,14 +1,12 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { MapPin, Mail, Send, User, MessageSquare, AtSign } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import AnimatedCopy from "./AnimatedCopy";
 
-gsap.registerPlugin(ScrollTrigger);
-
-// --- VARIANTES DE ANIMACIÓN ---
+// --- VARIANTES DE ANIMACIÓN (Framer Motion) ---
+// Mantenemos estas animaciones porque son de entrada y no afectan el scroll
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -41,7 +39,7 @@ const iconHoverVariants: Variants = {
 };
 
 export default function Contact() {
-  const sectionRef = useRef<HTMLElement>(null);
+  // Eliminamos sectionRef y useEffect de GSAP para quitar el "imán"
 
   const [formState, setFormState] = useState({
     name: "",
@@ -51,25 +49,6 @@ export default function Contact() {
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
-
-  // --- LÓGICA DE STICKY SCROLL (GSAP) ---
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: section,
-        pin: true,
-        start: "top top",
-        end: "+=50%",
-        scrub: true,
-        anticipatePin: 1,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   // --- LÓGICA DE FORMULARIO ---
   const handleChange = (
@@ -81,6 +60,7 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
+    // Simulación de envío (aquí conectarías tu API real)
     setTimeout(() => {
       setStatus("success");
       setFormState({ name: "", email: "", message: "" });
@@ -90,7 +70,6 @@ export default function Contact() {
 
   return (
     <section
-      ref={sectionRef}
       className="contact_section"
       style={{ position: "relative", zIndex: 10 }}
     >
@@ -99,7 +78,6 @@ export default function Contact() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        // CAMBIO: once: false para que se repita siempre
         viewport={{ once: false, amount: 0.3 }}
       >
         {/* COLUMNA IZQUIERDA: INFORMACIÓN */}
@@ -107,10 +85,12 @@ export default function Contact() {
           <motion.div className="contact_header" variants={itemVariants}>
             <span className="contact_subtitle">Hablemos</span>
             <h2 className="contact_title">Iniciá tu transformación digital.</h2>
-            <p className="contact_description">
-              Estamos listos para escalar tu negocio. Contanos sobre tu proyecto
-              y descubrí cómo podemos potenciarlo.
-            </p>
+            <AnimatedCopy colorFinal="#666666" triggerEnd="top 60%">
+              <p className="contact_description">
+                Estamos listos para escalar tu negocio. Contanos sobre tu
+                proyecto y descubrí cómo podemos potenciarlo.
+              </p>
+            </AnimatedCopy>
           </motion.div>
 
           <div className="contact_details">
@@ -128,7 +108,7 @@ export default function Contact() {
                 <h3>Ubicación</h3>
                 <p>Santa Fe, Argentina</p>
                 <span className="detail_note">
-                  (Trabajamos de forma remota globalmente)
+                  (Trabajamos de forma remota con alcance global)
                 </span>
               </div>
             </motion.div>
@@ -277,6 +257,7 @@ export default function Contact() {
 }
 
 // --- SUBCOMPONENTES ---
+
 function WhatsAppIcon() {
   return (
     <svg
@@ -323,7 +304,6 @@ function FloatingInput({
       className={`input_group ${isFocused || hasValue ? "active" : ""}`}
       initial={{ opacity: 0, x: -10 }}
       whileInView={{ opacity: 1, x: 0 }}
-      // CAMBIO: once: false para los inputs también
       viewport={{ once: false }}
       transition={{ duration: 0.5 }}
     >

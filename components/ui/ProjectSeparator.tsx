@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef } from "react";
+import AnimatedCopy from "./AnimatedCopy"; // Importamos
 
 const items = [
   "/pr1.jpg",
@@ -10,12 +11,12 @@ const items = [
   "/pr6.jpg",
 ];
 
-// 1. Agregamos la prop 'id' a la interfaz
 interface SeparatorProps {
   id?: string;
 }
 
 export default function ProjectSeparator({ id }: SeparatorProps) {
+  // ... lógica de imágenes (imageRefs, activate, handleOnMove) SE MANTIENE IGUAL ...
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
 
@@ -23,32 +24,27 @@ export default function ProjectSeparator({ id }: SeparatorProps) {
   let lastPosition = { x: 0, y: 0 };
 
   const activate = (image: HTMLImageElement, x: number, y: number) => {
+    // ... código existente ...
     const containerRect = containerRef.current?.getBoundingClientRect();
     if (!containerRect) return;
-
     const relativeX = x - containerRect.left;
     const relativeY = y - containerRect.top;
-
     image.style.left = `${relativeX}px`;
     image.style.top = `${relativeY}px`;
     image.style.zIndex = `${(globalIndex % items.length) + 1}`;
-
     image.dataset.status = "active";
-
     setTimeout(() => {
       image.dataset.status = "inactive";
     }, 1000);
-
     lastPosition = { x, y };
   };
 
-  const distanceFromLast = (x: number, y: number) => {
-    return Math.hypot(x - lastPosition.x, y - lastPosition.y);
-  };
+  const distanceFromLast = (x: number, y: number) =>
+    Math.hypot(x - lastPosition.x, y - lastPosition.y);
 
   const handleOnMove = (e: React.MouseEvent | React.TouchEvent) => {
+    // ... código existente ...
     let clientX, clientY;
-
     if ("touches" in e) {
       clientX = e.touches[0].clientX;
       clientY = e.touches[0].clientY;
@@ -59,16 +55,14 @@ export default function ProjectSeparator({ id }: SeparatorProps) {
 
     if (distanceFromLast(clientX, clientY) > 100) {
       const lead = imageRefs.current[globalIndex % items.length];
-      if (lead) {
-        activate(lead, clientX, clientY);
-      }
+      if (lead) activate(lead, clientX, clientY);
       globalIndex++;
     }
   };
 
   return (
     <section
-      id={id} // <--- 2. Asignamos el ID aquí
+      id={id}
       ref={containerRef}
       className="project_separator"
       onMouseMove={handleOnMove}
@@ -89,10 +83,14 @@ export default function ProjectSeparator({ id }: SeparatorProps) {
 
       <article className="project_separator_content">
         <h2>Nuestros Trabajos</h2>
-        <p>
-          Una muestra de los desafíos que hemos resuelto, ayudando a negocios y
-          profesionales a mejorar su operativa a través de la tecnología. <br />
-        </p>
+        {/* CORRECCIÓN: Aquí el texto final debe ser BLANCO (#ffffff) */}
+        <AnimatedCopy colorFinal="#ffffff">
+          <p>
+            Una muestra de los desafíos que hemos resuelto, ayudando a negocios
+            y profesionales a mejorar su operativa a través de la tecnología.{" "}
+            <br />
+          </p>
+        </AnimatedCopy>
       </article>
     </section>
   );

@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Navbar from "@/components/ui/Navbar";
 import initPlanet3D from "@/components/3D/planet";
 import Servicios from "@/components/ui/Servicios";
@@ -10,53 +9,15 @@ import ProjectSeparator from "@/components/ui/ProjectSeparator";
 import Projects from "@/components/ui/Projects";
 import Contact from "@/components/ui/Contact";
 import Footer from "@/components/ui/Footer";
+import AnimatedCopy from "@/components/ui/AnimatedCopy"; // Importamos el componente
 import "@/styles/pages/home.css";
 import "@/styles/pages/landing.css";
 import "@/styles/sections/separators.css";
 
-// Registramos los plugins de GSAP
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  // --- EFECTO HERO -> SERVICIOS ---
-  useEffect(() => {
-    let isScrolling = false;
-
-    // Definimos el contexto de GSAP para limpieza automática
-    const ctx = gsap.context(() => {
-      // ScrollTrigger mejorado para detectar cualquier scroll en el hero
-      ScrollTrigger.create({
-        trigger: "#hero",
-        start: "top top",
-        end: "bottom top",
-
-        // Detectar cuando el usuario hace cualquier scroll hacia abajo
-        onUpdate: (self) => {
-          // Si el usuario scrolleó más del 3% del hero hacia abajo y no está ya scrolleando
-          if (self.progress > 0.03 && self.direction === 1 && !isScrolling) {
-            isScrolling = true;
-
-            // Animar suavemente hacia el separador de servicios
-            gsap.to(window, {
-              duration: 1,
-              scrollTo: { y: "#servicios", offsetY: 0 },
-              ease: "power2.inOut",
-              onComplete: () => {
-                // Resetear flag después de un tiempo
-                setTimeout(() => {
-                  isScrolling = false;
-                }, 500);
-              },
-            });
-          }
-        },
-      });
-    });
-
-    return () => ctx.revert(); // Limpieza al desmontar
-  }, []);
-
-  // --- PLANETA 3D (Tu código original) ---
+  // --- PLANETA 3D ---
   useEffect(() => {
     const { scene, renderer } = initPlanet3D();
     return () => {
@@ -65,6 +26,18 @@ export default function Home() {
         gl.getExtension("WEBGL_lose_context")?.loseContext();
         renderer.dispose();
       }
+    };
+  }, []);
+
+  // --- SOLUCIÓN DEL BUG DE SCROLL (REFRESH) ---
+  useEffect(() => {
+    // Forzamos un refresco doble para asegurar que el layout esté asentado
+    const timer1 = setTimeout(() => ScrollTrigger.refresh(), 100);
+    const timer2 = setTimeout(() => ScrollTrigger.refresh(), 500); // Por si cargan imágenes
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
     };
   }, []);
 
@@ -88,20 +61,22 @@ export default function Home() {
       </section>
 
       {/* SEPARADOR SERVICIOS */}
-      {/* IMPORTANTE: Quitamos el scrollMarginTop exagerado para que el SNAP de GSAP calce perfecto */}
       <section id="servicios" className="separator_section">
         <div className="separator_content">
           <h2>Servicios</h2>
-          <p>
-            Desde experiencias web hasta automatizaciones con IA: herramientas
-            reales para problemas actuales.
-          </p>
+          {/* CORRECCIÓN DE COLOR: Finaliza en Gris (#a1a1a6) */}
+          <AnimatedCopy colorFinal="#a1a1a6">
+            <p>
+              Desde experiencias web hasta automatizaciones con IA: herramientas
+              reales para problemas actuales.
+            </p>
+          </AnimatedCopy>
         </div>
       </section>
 
       <Servicios />
 
-      {/* SEPARADOR PROYECTOS */}
+      {/* SEPARADOR PROYECTOS (ProjectSeparator ya lo maneja internamente, ver paso 2) */}
       <ProjectSeparator id="trabajos" />
 
       <Projects />
@@ -110,10 +85,13 @@ export default function Home() {
       <section id="contacto" className="separator_section">
         <div className="separator_content">
           <h2>Contacto</h2>
-          <p>
-            Estamos para escucharte. Contanos qué necesita tu negocio hoy y
-            busquemos juntos la mejor forma de resolverlo.
-          </p>
+          {/* CORRECCIÓN DE COLOR: Finaliza en Gris (#a1a1a6) */}
+          <AnimatedCopy colorFinal="#a1a1a6">
+            <p>
+              Estamos para escucharte. Contanos qué necesita tu negocio hoy y
+              busquemos juntos la mejor forma de resolverlo.
+            </p>
+          </AnimatedCopy>
         </div>
       </section>
 

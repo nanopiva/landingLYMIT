@@ -2,7 +2,7 @@
 .project_separator {
   position: relative;
   width: 100%;
-  min-height: 100vh; /* Altura completa para que haya espacio para jugar */
+  min-height: 110vh; /* Altura completa para que haya espacio para jugar */
   background-color: #0e0e0c; /* Tu color oscuro corporativo */
   display: flex;
   justify-content: center;
@@ -52,7 +52,9 @@
   transform: translate(-50%, -50%) scale(0.5);
 
   /* Transición suave */
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s ease;
 
   pointer-events: none; /* CRÍTICO: el mouse no debe detectar la imagen o parpadeará */
   z-index: 10;

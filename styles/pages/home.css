@@ -1,11 +1,9 @@
-/* Contenedor principal de la Home */
+/* home.css */
+
 .page {
-  display: block; /* Flujo normal */
+  display: block;
   width: 100%;
   position: relative;
-  /* IMPORTANTE: No pongas overflow aquí. Deja que el body se encargue. */
-  /* background-color: var(--background); <-- Ya lo maneja el body, pero puedes dejarlo */
-  scroll-snap-type: y proximity;
 }
 
 .main {

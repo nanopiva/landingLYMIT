@@ -35,7 +35,8 @@
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 100px;
 
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02),
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.02),
     0 10px 15px -3px rgba(0, 0, 0, 0.03);
 
   transition: all 0.3s ease;
@@ -61,41 +62,41 @@
   /* margin-left: 5px; */
 }
 
-/* La Imagen del Logo */
 .nav_logo_img {
-  /* TU NAVBAR MIDE 54px TOTALES. */
-  /* Tiene padding de 5px arriba y abajo. */
-  /* Espacio libre real = 44px. */
-
-  /* 1. TAMAÑO: Lo ponemos casi al máximo posible */
+  /* TAMAÑO Y AJUSTES BASE */
   height: 72px;
   width: auto;
-
-  /* 2. COMPORTAMIENTO */
-  display: block; /* Elimina espacios fantasmas de inline elements */
+  display: block;
   object-fit: contain;
 
-  /* 3. ALINEACIÓN MANUAL (Ajuste Fino) */
-  /* Si sientes que se ve "arriba", esto lo empuja píxeles hacia abajo */
-  /* Prueba con 1px, 2px o 3px hasta que tu ojo lo vea perfecto */
+  /* Posición Base */
   transform: translateY(5px);
+
+  /* --- NUEVO: TRANSICIÓN SUAVE (PREMIUM FEEL) --- */
+  /* Usamos un cubic-bezier para que arranque rápido y frene suave */
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    filter 0.4s ease;
+
+  /* Optimización de rendimiento para animaciones */
+  will-change: transform;
 }
 
+/* ESTADO HOVER: Efecto de "Levitación" */
 .nav_logo_wrapper:hover .nav_logo_img {
-  /* IMPORTANTE: Mantenemos el translateY(2px) y agregamos la escala */
-  transform: translateY(5px) scale(1.1);
+  /* Escala sutil (1.05 es más elegante que 1.1) */
+  /* Mantenemos el translateY(5px) original para no saltar */
+  transform: translateY(5px) scale(1.08);
 
-  /* Sombra sutil para dar efecto de elevación */
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
-
-  /* Si usaste opacidad antes, aquí la restauras */
-  /* opacity: 1; */
+  /* Sombra difusa suave */
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.12));
 }
 
-/* ESTADO CLICK (Active) - Pequeño rebote al hacer click */
+/* ESTADO CLICK: Efecto de "Pulsación" al presionar */
 .nav_logo_wrapper:active .nav_logo_img {
-  transform: translateY(2px) scale(0.95);
-  transition: transform 0.1s ease;
+  /* Se achica un poco para dar feedback táctil */
+  transform: translateY(5px) scale(0.95);
+  transition: transform 0.1s ease-out; /* Reacción rápida al click */
 }
 
 .nav_links {
