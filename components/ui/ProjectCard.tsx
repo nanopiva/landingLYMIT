@@ -1,94 +1,126 @@
 "use client";
-import { useRef } from "react";
+
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
-import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
 
 interface CardProps {
   i: number;
   title: string;
   description: string;
-  src: string;
-  url: string; // Coincide con el dato que pasamos
+  gallery: string[];
+  link: string;
   color: string;
-  textColor?: string;
   progress: MotionValue<number>;
   range: [number, number];
   targetScale: number;
+  category: string;
+  tags: string[];
 }
 
-export const Card: React.FC<CardProps> = ({
+export default function ProjectCard({
   i,
   title,
   description,
-  src,
-  url,
+  gallery,
+  link,
   color,
-  textColor,
   progress,
   range,
   targetScale,
-}) => {
+  category,
+  tags,
+}: CardProps) {
   const container = useRef(null);
-
-  // Animación interna de la imagen (Parallax)
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start end", "start start"],
   });
 
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.2, 1]); // Zoom out sutil
   const scale = useTransform(progress, range, [1, targetScale]);
 
   return (
     <div ref={container} className="card_sticky_wrapper">
       <motion.div
-        className="card_content"
+        className="card"
         style={{
           backgroundColor: color,
-          color: textColor || "#000",
           scale,
-          // AJUSTE CLAVE: Calculamos el 'top' para que se vea el efecto cascada
-          // Aumentamos el gap a 35px para que se note la separación superior
-          top: `calc(5vh + ${i * 35}px)`,
+          top: `calc(-5vh + ${i * 25}px)`,
         }}
       >
         <div className="card_body">
-          <div className="card_text">
-            <h2 className="card_title">{title}</h2>
+          {/* TEXTO */}
+          <div className="card_text_column">
+            <div className="card_header_text">
+              <span className="card_category_label">{category}</span>
+              <h2 className="card_title_desktop">{title}</h2>
+            </div>
+
             <p className="card_description">{description}</p>
 
-            <a
-              href={url}
-              target="_blank"
-              className="card_link"
-              rel="noopener noreferrer"
-            >
-              Ver Proyecto
-              <svg
-                width="18"
-                height="12"
-                viewBox="0 0 22 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M21.5303 6.53033C21.8232 6.23744 21.8232 5.76256 21.5303 5.46967L16.7574 0.696699C16.4645 0.403806 15.9896 0.403806 15.6967 0.696699C15.4038 0.989592 15.4038 1.46447 15.6967 1.75736L19.9393 6L15.6967 10.2426C15.4038 10.5355 15.4038 11.0104 15.6967 11.3033C15.9896 11.5962 16.4645 11.5962 16.7574 11.3033L21.5303 6.53033ZM0 6.75L21 6.75V5.25L0 5.25L0 6.75Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </a>
+            <div className="card_tags_container">
+              {tags.map((tag, idx) => (
+                <span key={idx} className="card_tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
 
-          <div className="card_image_container">
-            <motion.div
-              className="card_image_inner"
-              style={{ scale: imageScale }}
-            >
-              <Image fill src={src} alt={title} className="card_img" />
-            </motion.div>
+          {/* GALERÍA */}
+          <div className="card_image_column">
+            <AccordionGallery items={gallery} />
           </div>
         </div>
       </motion.div>
     </div>
   );
-};
+}
+
+// --- COMPONENTE ACORDEÓN ---
+function AccordionGallery({ items }: { items: string[] }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <div className="accordion_container">
+      {items.map((src, index) => {
+        const isActive = activeIndex === index;
+
+        return (
+          <motion.div
+            key={index}
+            className={`accordion_item ${isActive ? "active" : ""}`}
+            onMouseEnter={() => setActiveIndex(index)}
+            onClick={() => setActiveIndex(index)}
+            initial={false}
+            animate={{
+              flexGrow: isActive ? 5 : 1,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 200,
+              damping: 25,
+            }}
+          >
+            {/* IMAGEN SIMPLE (Cover + Center) */}
+            <Image
+              src={src}
+              fill
+              alt="Project view"
+              className="accordion_img"
+              sizes="(max-width: 1200px) 100vw, 50vw"
+              priority={index === 0}
+            />
+
+            {/* OVERLAY */}
+            <motion.div
+              className="accordion_overlay_simple"
+              animate={{ opacity: isActive ? 0 : 0.4 }}
+            />
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}

@@ -14,7 +14,7 @@ const services = [
     description:
       "La primera impresión de tu negocio entra por los ojos. Diseñamos sitios web elegantes y fáciles de navegar que reflejan la calidad de tu trabajo y generan la confianza necesaria para que te elijan.",
     tags: ["Landing Pages", "Sitios Corporativos", "3D WebGL", "SEO Técnico"],
-    image: "/modern-web.jpg",
+    image: "/modern-web.png",
   },
   {
     id: "02",
@@ -28,7 +28,7 @@ const services = [
       "WooCommerce",
       "Analítica de Ventas",
     ],
-    image: "/e-commerce.jpg",
+    image: "/e-commerce.png",
   },
   {
     id: "03",
@@ -42,7 +42,7 @@ const services = [
       "Chatbots GPT-4",
       "Reducción de Costos",
     ],
-    image: "/ai-automation.jpg",
+    image: "/ai-automation.png",
   },
   {
     id: "04",

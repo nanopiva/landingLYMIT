@@ -49,7 +49,7 @@ export default function Footer() {
               <h3 className="col_title">Seguinos</h3>
               <div className="social_icons">
                 <a
-                  href="https://instagram.com/lymitsolutions/"
+                  href="https://instagram.com/lymitsolutions_/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social_btn"

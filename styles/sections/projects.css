@@ -1,10 +1,16 @@
+/* styles/sections/projects.css */
+
 /* --- CONTENEDOR PRINCIPAL --- */
-.projects_main_container {
-  background-color: var(--background);
+.projects_main {
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+  padding: 0 20px;
   position: relative;
   width: 100%;
-  /* Menos padding abajo ya que las cards son enormes */
-  padding-bottom: 5vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* --- WRAPPER STICKY --- */
@@ -17,48 +23,48 @@
   top: 0;
 }
 
-/* --- TARJETA ANIMADA (GIGANTE) --- */
-.card_inner_motion {
-  position: relative;
-  /* Centrado natural */
-  top: 0;
-
-  /* DIMENSIONES AUMENTADAS */
-  width: 1600px; /* Base ancha */
-  max-width: 95vw; /* Ocupa casi todo el ancho en cualquier pantalla */
-  height: 75vh; /* Ocupa 3/4 de la altura de la pantalla */
-
-  border-radius: 12px;
-  padding: 0;
-
-  transform-origin: top;
-  overflow: hidden;
-
-  /* Sombra más amplia para soportar el tamaño */
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-
+/* --- TARJETA PRINCIPAL (ESTILO GLASS) --- */
+.card {
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  /* Dimensiones */
+  height: 650px;
+  width: 1400px;
+  max-width: 95vw;
+
+  border-radius: 32px;
+  padding: 50px;
+  transform-origin: top center;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  /* Efecto Vidrio */
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  /* Sombras */
+  box-shadow:
+    0 -10px 40px rgba(0, 0, 0, 0.08),
+    0 30px 60px -10px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
 }
 
-/* --- GRID LAYOUT --- */
-.card_content_grid {
+.card_body {
   display: flex;
   height: 100%;
   width: 100%;
+  gap: 60px;
 }
 
-/* --- COLUMNA TEXTO --- */
+/* --- COLUMNA IZQUIERDA (TEXTO) --- */
 .card_text_column {
-  width: 35%; /* Reducimos un poco el texto para darle más aire a la imagen si quieres, o 40% */
-  padding: 80px 60px; /* Padding generoso */
+  width: 35%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrado vertical del contenido */
-  gap: 40px;
-  background-color: #fff;
-  z-index: 2;
+  justify-content: space-between;
 }
 
 .card_header_text {
@@ -68,123 +74,130 @@
 }
 
 .card_category_label {
-  font-family: var(--inter), sans-serif;
-  font-size: 0.9rem;
+  font-family: var(--inter);
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #999;
+  letter-spacing: 2px;
+  color: rgba(0, 0, 0, 0.5);
   font-weight: 600;
 }
 
 .card_title_desktop {
   font-family: var(--apple-garamond), serif;
-  font-size: 4rem; /* Título más grande */
-  line-height: 1;
+  font-size: 64px;
+  line-height: 0.95;
   margin: 0;
-  color: #000;
-}
-
-.card_title_mobile {
-  display: none;
+  letter-spacing: -0.03em;
+  color: #1a1a1a;
 }
 
 .card_description {
-  font-family: var(--inter), sans-serif;
-  font-size: 1.25rem; /* Texto más grande para lectura cómoda */
+  font-family: var(--inter);
+  font-size: 18px;
   line-height: 1.6;
-  color: #444;
-  text-wrap: pretty;
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 30px;
 }
 
-/* Tags */
 .card_tags_container {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .card_tag {
-  font-family: var(--inter), sans-serif;
-  font-size: 0.9rem;
-  padding: 10px 20px;
-  border: 1px solid #e5e5e5;
+  font-size: 13px;
+  padding: 8px 18px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 100px;
-  color: #333;
-  background-color: #fafafa;
+  font-family: var(--inter);
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
 }
 
-/* --- COLUMNA IMAGEN --- */
+/* --- COLUMNA DERECHA (GALERÍA) --- */
 .card_image_column {
-  width: 65%; /* Imagen domina */
+  width: 65%;
   height: 100%;
   position: relative;
+  border-radius: 24px;
   overflow: hidden;
-  background-color: #f0f0f0;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.03),
+    0 10px 30px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
-.card_image_inner {
+/* --- ACORDEÓN --- */
+.accordion_container {
+  display: flex;
   width: 100%;
   height: 100%;
-  position: relative;
+  gap: 15px;
 }
 
-.card_img {
+.accordion_item {
+  position: relative;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  min-width: 60px;
+  /* Fondo neutro por si tarda en cargar la imagen */
+  background-color: #f5f5f7;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* --- IMAGEN CORREGIDA PARA SHOTS.SO --- */
+.accordion_img {
+  /* CAMBIO: 'cover' mantiene la proporción perfecta */
   object-fit: cover;
+
+  /* CAMBIO: 'center' asegura que se vea el centro (donde está tu captura) */
+  object-position: center center;
+
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Efecto de "acercamiento" suave al activar */
+.accordion_item.active .accordion_img {
+  transform: scale(1.05);
+}
+
+.accordion_overlay_simple {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  pointer-events: none;
 }
 
 /* --- RESPONSIVE --- */
-@media (max-width: 1280px) {
-  /* Ajuste para laptops */
-  .card_text_column {
-    padding: 50px 40px;
-    width: 40%;
-  }
-  .card_image_column {
-    width: 60%;
-  }
-  .card_title_desktop {
-    font-size: 3rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  /* Ajuste Tablet/Móvil: Volvemos a apilar vertical */
-  .card_inner_motion {
-    height: 80vh; /* Aún más alto en móvil */
+@media (max-width: 1200px) {
+  .card {
     width: 95vw;
-  }
-
-  .card_content_grid {
-    flex-direction: column-reverse;
-  }
-
-  .card_text_column {
-    width: 100%;
     height: auto;
+    min-height: 700px;
     padding: 30px;
-    gap: 20px;
-    justify-content: flex-start;
+  }
+
+  .card_body {
+    flex-direction: column-reverse;
+    gap: 30px;
+  }
+
+  .card_text_column,
+  .card_image_column {
+    width: 100%;
   }
 
   .card_image_column {
-    width: 100%;
-    height: 50%;
-    flex: 1;
+    height: 400px;
   }
 
   .card_title_desktop {
-    display: none;
-  }
-
-  .card_title_mobile {
-    display: block;
-    font-family: var(--apple-garamond), serif;
-    font-size: 2.5rem;
-    color: #000;
-    margin: 20px 0 10px 30px; /* Alineado con el padding del texto */
-  }
-
-  .card_description {
-    font-size: 1rem;
+    font-size: 42px;
   }
 }

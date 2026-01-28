@@ -39,8 +39,6 @@ const iconHoverVariants: Variants = {
 };
 
 export default function Contact() {
-  // Eliminamos sectionRef y useEffect de GSAP para quitar el "imán"
-
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -50,22 +48,41 @@ export default function Contact() {
     "idle" | "loading" | "success" | "error"
   >("idle");
 
-  // --- LÓGICA DE FORMULARIO ---
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
+  // --- AQUÍ ESTÁ EL CAMBIO IMPORTANTE ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    // Simulación de envío (aquí conectarías tu API real)
-    setTimeout(() => {
-      setStatus("success");
-      setFormState({ name: "", email: "", message: "" });
-      setTimeout(() => setStatus("idle"), 3000);
-    }, 2000);
+
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setFormState({ name: "", email: "", message: "" }); // Limpiamos inputs
+
+        // Volvemos al estado inicial después de 5 seg para permitir otro envío
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch (error) {
+      console.error("Error al enviar formulario:", error);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   return (
