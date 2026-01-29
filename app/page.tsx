@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLenis } from "lenis/react"; // <--- 1. Importamos useLenis
 import Navbar from "@/components/ui/Navbar";
 import initPlanet3D from "@/components/3D/planet";
 import Servicios from "@/components/ui/Servicios";
@@ -9,7 +10,7 @@ import ProjectSeparator from "@/components/ui/ProjectSeparator";
 import Projects from "@/components/ui/Projects";
 import Contact from "@/components/ui/Contact";
 import Footer from "@/components/ui/Footer";
-import AnimatedCopy from "@/components/ui/AnimatedCopy"; // Importamos el componente
+import AnimatedCopy from "@/components/ui/AnimatedCopy";
 import "@/styles/pages/home.css";
 import "@/styles/pages/landing.css";
 import "@/styles/sections/separators.css";
@@ -17,6 +18,8 @@ import "@/styles/sections/separators.css";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const lenis = useLenis(); // <--- 2. Inicializamos el hook
+
   // --- PLANETA 3D ---
   useEffect(() => {
     const { scene, renderer } = initPlanet3D();
@@ -31,15 +34,22 @@ export default function Home() {
 
   // --- SOLUCIÓN DEL BUG DE SCROLL (REFRESH) ---
   useEffect(() => {
-    // Forzamos un refresco doble para asegurar que el layout esté asentado
     const timer1 = setTimeout(() => ScrollTrigger.refresh(), 100);
-    const timer2 = setTimeout(() => ScrollTrigger.refresh(), 500); // Por si cargan imágenes
+    const timer2 = setTimeout(() => ScrollTrigger.refresh(), 500);
 
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
   }, []);
+
+  // <--- 3. Función para manejar el click del botón "Ver más"
+  const handleCtaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // Le damos un offset de 0 para que quede clavado arriba, o incluso 1px
+    // para asegurar que tape la línea anterior si hay sub-pixel rendering.
+    lenis?.scrollTo("#servicios", { offset: 0 });
+  };
 
   return (
     <div className="page">
@@ -53,7 +63,8 @@ export default function Home() {
             Implementamos soluciones digitales y agentes inteligentes que
             trabajan por vos las 24 horas del día.
           </p>
-          <a href="#servicios">
+          {/* 4. Aplicamos el onClick personalizado */}
+          <a href="#servicios" onClick={handleCtaClick}>
             <button className="cta_btn">Ver más</button>
           </a>
         </div>
@@ -64,7 +75,6 @@ export default function Home() {
       <section id="servicios" className="separator_section">
         <div className="separator_content">
           <h2>Servicios</h2>
-          {/* CORRECCIÓN DE COLOR: Finaliza en Gris (#a1a1a6) */}
           <AnimatedCopy colorFinal="#a1a1a6">
             <p>
               Desde experiencias web hasta automatizaciones con IA: herramientas
@@ -76,7 +86,7 @@ export default function Home() {
 
       <Servicios />
 
-      {/* SEPARADOR PROYECTOS (ProjectSeparator ya lo maneja internamente, ver paso 2) */}
+      {/* SEPARADOR PROYECTOS */}
       <ProjectSeparator id="trabajos" />
 
       <Projects />
@@ -85,7 +95,6 @@ export default function Home() {
       <section id="contacto" className="separator_section">
         <div className="separator_content">
           <h2>Contacto</h2>
-          {/* CORRECCIÓN DE COLOR: Finaliza en Gris (#a1a1a6) */}
           <AnimatedCopy colorFinal="#a1a1a6">
             <p>
               Estamos para escucharte. Contanos qué necesita tu negocio hoy y

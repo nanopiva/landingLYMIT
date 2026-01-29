@@ -9,6 +9,15 @@
   --font-geist-sans: var(--inter);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Evitá que las secciones tapen el Navbar si usas IDs */
+section {
+  scroll-margin-top: 80px; /* Ajustá esto según el alto de tu Navbar */
+}
+
 html,
 body {
   width: 100%;

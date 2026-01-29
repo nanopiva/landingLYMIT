@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
   try {
@@ -16,12 +14,23 @@ export async function POST(request: Request) {
       );
     }
 
+    // Configuración del transporte de Hostinger
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: true, // true para puerto 465
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+
     // Envío del email
-    const data = await resend.emails.send({
-      from: "Web Contact <onboarding@resend.dev>", // Usa este remitente temporalmente
-      to: ["contact@lymitsolutions.com"], // <--- ¡PON TU EMAIL REAL AQUÍ!
+    await transporter.sendMail({
+      from: `"Web Contact" <${process.env.SMTP_USER}>`, // Debe ser tu mail de Hostinger
+      to: "contact@lymitsolutions.com",
+      replyTo: email, // Permite responderle directo al usuario
       subject: `Nuevo Lead de LYMIT: ${name}`,
-      replyTo: email, // Para responderle directo al usuario
       html: `
         <div style="font-family: sans-serif; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
           <h2 style="color: #000;">Nuevo Mensaje de la Web</h2>
@@ -34,8 +43,12 @@ export async function POST(request: Request) {
       `,
     });
 
-    return NextResponse.json(data);
+    return NextResponse.json({ message: "Email enviado con éxito" });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    console.error("Error en Nodemailer:", error);
+    return NextResponse.json(
+      { error: "Error al enviar el email" },
+      { status: 500 },
+    );
   }
 }
