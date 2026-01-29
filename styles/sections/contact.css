@@ -255,6 +255,9 @@
 
 /* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
+  .contact_subtitle {
+    margin-top: 20px;
+  }
   .contact_container {
     grid-template-columns: 1fr;
     gap: 60px;

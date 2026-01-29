@@ -50,6 +50,15 @@
     0 -10px 40px rgba(0, 0, 0, 0.08),
     0 30px 60px -10px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+
+  will-change: transform;
+
+  /* 2. Evita parpadeos en 3D y mejora bordes */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  /* 3. Acelera el renderizado de la geometría */
+  transform: translateZ(0);
 }
 
 .card_body {
@@ -151,20 +160,22 @@
 
 /* --- IMAGEN CORREGIDA PARA SHOTS.SO --- */
 .accordion_img {
-  /* CAMBIO: 'cover' mantiene la proporción perfecta */
   object-fit: cover;
 
-  /* CAMBIO: 'center' asegura que se vea el centro (donde está tu captura) */
-  object-position: center center;
+  /* CAMBIO CLAVE 1: 'top' fija la imagen arriba. 
+     El Navbar JAMÁS se cortará, si sobra imagen se cortará de abajo. */
+  object-position: center top;
 
   width: 100%;
   height: 100%;
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Efecto de "acercamiento" suave al activar */
+/* CAMBIO CLAVE 2: Reducimos el zoom */
 .accordion_item.active .accordion_img {
-  transform: scale(1.05);
+  /* Antes era 1.05. Lo bajamos a 1.01 (casi imperceptible) 
+     para que no "expulse" los bordes de la foto hacia afuera. */
+  transform: scale(1.01);
 }
 
 .accordion_overlay_simple {
@@ -199,5 +210,88 @@
 
   .card_title_desktop {
     font-size: 42px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .projects_main {
+    padding: 0 15px;
+    margin-top: 10vh; /* Menos margen arriba */
+    margin-bottom: 10vh;
+    gap: 40px; /* Espacio real entre tarjetas (Lista vertical) */
+  }
+
+  /* 1. ELIMINAR STICKY BEHAVIOR */
+  .card_sticky_wrapper {
+    height: auto !important; /* Ya no ocupa toda la pantalla */
+    position: relative !important; /* Ya no es sticky */
+    top: auto !important;
+    display: block;
+    margin-bottom: 40px; /* Margen entre cada proyecto */
+  }
+
+  /* 2. TARJETA NORMAL */
+  .card {
+    width: 100%;
+    height: auto;
+    min-height: auto; /* Dejar que el contenido defina el alto */
+    padding: 25px;
+    border-radius: 24px;
+
+    /* Importante: Reseteamos transformaciones que puedan quedar */
+    transform: none !important;
+    top: 0 !important;
+  }
+
+  .card_body {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .card_text_column {
+    width: 100%;
+  }
+
+  .card_title_desktop {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  .card_description {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  /* GALERÍA / SLIDER */
+  .card_image_column {
+    width: 100%;
+    height: 300px; /* Un poco más bajo en mobile para ver más contenido */
+    border-radius: 16px;
+    background: transparent;
+    box-shadow: none;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+
+  .accordion_container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-right: 20px;
+    /* Ajuste para que el scroll sea suave en iOS */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .accordion_item {
+    min-width: 90%;
+    scroll-snap-align: center;
+    background-color: #f0f0f2;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  .accordion_img {
+    object-fit: contain !important;
+    object-position: center center !important;
   }
 }

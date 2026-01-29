@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
+import "@/styles/sections/projects.css";
 
 interface CardProps {
   i: number;
@@ -32,6 +33,16 @@ export default function ProjectCard({
   tags,
 }: CardProps) {
   const container = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // 1. Detectamos mobile para desactivar la animación de la tarjeta completa
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start end", "start start"],
@@ -45,12 +56,14 @@ export default function ProjectCard({
         className="card"
         style={{
           backgroundColor: color,
-          scale,
-          top: `calc(-5vh + ${i * 25}px)`,
+          // 2. LÓGICA CONDICIONAL:
+          // Si es mobile: Escala 1 (normal) y Top 0 (sin desplazamiento)
+          // Si es desktop: Usa la animación de Framer Motion
+          scale: isMobile ? 1 : scale,
+          top: isMobile ? 0 : `calc(-5vh + ${i * 25}px)`,
         }}
       >
         <div className="card_body">
-          {/* TEXTO */}
           <div className="card_text_column">
             <div className="card_header_text">
               <span className="card_category_label">{category}</span>
@@ -68,9 +81,9 @@ export default function ProjectCard({
             </div>
           </div>
 
-          {/* GALERÍA */}
           <div className="card_image_column">
-            <AccordionGallery items={gallery} />
+            {/* Pasamos isMobile como prop para no recalcularlo dentro */}
+            <AccordionGallery items={gallery} isMobile={isMobile} />
           </div>
         </div>
       </motion.div>
@@ -78,8 +91,14 @@ export default function ProjectCard({
   );
 }
 
-// --- COMPONENTE ACORDEÓN ---
-function AccordionGallery({ items }: { items: string[] }) {
+// --- GALERÍA (Ahora recibe isMobile como prop) ---
+function AccordionGallery({
+  items,
+  isMobile,
+}: {
+  items: string[];
+  isMobile: boolean;
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -91,11 +110,10 @@ function AccordionGallery({ items }: { items: string[] }) {
           <motion.div
             key={index}
             className={`accordion_item ${isActive ? "active" : ""}`}
-            onMouseEnter={() => setActiveIndex(index)}
-            onClick={() => setActiveIndex(index)}
-            initial={false}
+            onMouseEnter={() => !isMobile && setActiveIndex(index)}
+            onClick={() => !isMobile && setActiveIndex(index)}
             animate={{
-              flexGrow: isActive ? 5 : 1,
+              flexGrow: isMobile ? 0 : isActive ? 5 : 1,
             }}
             transition={{
               type: "spring",
@@ -103,21 +121,21 @@ function AccordionGallery({ items }: { items: string[] }) {
               damping: 25,
             }}
           >
-            {/* IMAGEN SIMPLE (Cover + Center) */}
             <Image
               src={src}
               fill
               alt="Project view"
               className="accordion_img"
-              sizes="(max-width: 1200px) 100vw, 50vw"
+              sizes="(max-width: 768px) 85vw, (max-width: 1200px) 50vw, 33vw"
               priority={index === 0}
+              quality={85}
             />
-
-            {/* OVERLAY */}
-            <motion.div
-              className="accordion_overlay_simple"
-              animate={{ opacity: isActive ? 0 : 0.4 }}
-            />
+            {!isMobile && (
+              <motion.div
+                className="accordion_overlay_simple"
+                animate={{ opacity: isActive ? 0 : 0.4 }}
+              />
+            )}
           </motion.div>
         );
       })}

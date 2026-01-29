@@ -56,7 +56,7 @@ const services = [
       "Cloud Architecture",
       "Bases de Datos",
     ],
-    image: "/software-architecture.jpg",
+    image: "/software-architecture.png",
   },
 ];
 

@@ -26,7 +26,7 @@ const projects = [
     description:
       "Sitio web profesional para psicopedagoga. Diseño minimalista enfocado en generar confianza y facilitar el contacto con pacientes.",
     gallery: [
-      "/project2-1.jpeg",
+      "/project2-1.png",
       "/project2-2.png",
       "/project2-3.png",
       "/project2-4.png",
@@ -58,12 +58,12 @@ const projects = [
     description:
       "Plataforma corporativa para gestión de servicios legales. Diseño sobrio y funcional adaptado a las necesidades del estudio.",
     gallery: [
-      "/project3-1.jpeg",
-      "/project3-2.png",
-      "/project3-3.png",
-      "/project3-4.png",
+      "/project4-1.png",
+      "/project4-2.png",
+      "/project4-3.png",
+      "/project4-4.png",
     ],
-    link: "https://koble.com.ar",
+    link: "https://cycsolucioneslegales.com.ar",
     // CAMBIO: 0.97
     color: "rgba(225, 228, 230, 0.97)",
     category: "Sitio Corporativo",
