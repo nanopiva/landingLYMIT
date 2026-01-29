@@ -84,7 +84,7 @@ export default function ProjectSeparator({ id }: SeparatorProps) {
       <article className="project_separator_content">
         <h2>Nuestros Trabajos</h2>
         {/* CORRECCIÓN: Aquí el texto final debe ser BLANCO (#ffffff) */}
-        <AnimatedCopy colorFinal="#ffffff">
+        <AnimatedCopy colorFinal="#a1a1a6" triggerEnd="top 60%">
           <p>
             Una muestra de los desafíos que hemos resuelto, ayudando a negocios
             y profesionales a mejorar su operativa a través de la tecnología.{" "}

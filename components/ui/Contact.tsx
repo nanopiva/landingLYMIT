@@ -101,8 +101,8 @@ export default function Contact() {
         <div className="contact_info_col">
           <motion.div className="contact_header" variants={itemVariants}>
             <span className="contact_subtitle">Hablemos</span>
-            <h2 className="contact_title">Iniciá tu transformación digital.</h2>
-            <AnimatedCopy colorFinal="#666666" triggerEnd="top 60%">
+            <h2 className="contact_title">Mejoremos tu presencia digital.</h2>
+            <AnimatedCopy colorFinal="#666666">
               <p className="contact_description">
                 Estamos listos para escalar tu negocio. Contanos sobre tu
                 proyecto y descubrí cómo podemos potenciarlo.
@@ -123,7 +123,10 @@ export default function Contact() {
               </motion.div>
               <div className="detail_text_wrapper">
                 <h3>Ubicación</h3>
-                <p>Santa Fe, Argentina</p>
+
+                <AnimatedCopy colorFinal="#666666" triggerEnd="top 60%">
+                  <p>Santa Fe, Argentina</p>
+                </AnimatedCopy>
                 <span className="detail_note">
                   (Trabajamos de forma remota con alcance global)
                 </span>
@@ -142,12 +145,14 @@ export default function Contact() {
               </motion.div>
               <div className="detail_text_wrapper">
                 <h3>Email</h3>
-                <a
-                  href="mailto:contact@lymitsolutions.com"
-                  className="detail_link"
-                >
-                  contact@lymitsolutions.com
-                </a>
+                <AnimatedCopy colorFinal="#666666" triggerEnd="top 80%">
+                  <a
+                    href="mailto:contact@lymitsolutions.com"
+                    className="detail_link"
+                  >
+                    contact@lymitsolutions.com
+                  </a>
+                </AnimatedCopy>
               </div>
             </motion.div>
 
@@ -164,20 +169,24 @@ export default function Contact() {
               <div className="detail_text_wrapper">
                 <h3>WhatsApp</h3>
                 <div className="phones_grid">
-                  <a
-                    href="https://wa.me/5493425364800"
-                    target="_blank"
-                    className="detail_link"
-                  >
-                    +54 9 (342) 536-4800
-                  </a>
-                  <a
-                    href="https://wa.me/5491123957675"
-                    target="_blank"
-                    className="detail_link"
-                  >
-                    +54 9 (011) 239-57675
-                  </a>
+                  <AnimatedCopy colorFinal="#666666" triggerEnd="top 80%">
+                    <a
+                      href="https://wa.me/5493425364800"
+                      target="_blank"
+                      className="detail_link"
+                    >
+                      +54 9 (342) 536-4800
+                    </a>
+                  </AnimatedCopy>
+                  <AnimatedCopy colorFinal="#666666" triggerEnd="top 80%">
+                    <a
+                      href="https://wa.me/5491123957675"
+                      target="_blank"
+                      className="detail_link"
+                    >
+                      +54 9 (011) 239-57675
+                    </a>
+                  </AnimatedCopy>
                 </div>
               </div>
             </motion.div>

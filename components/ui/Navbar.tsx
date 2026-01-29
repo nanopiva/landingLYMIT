@@ -24,15 +24,15 @@ export default function Navbar() {
     else setHidden(false);
   });
 
-  // Aceptamos string (ID) o number (pixel exacto)
   const handleScrollLink = (
     e: React.MouseEvent<HTMLAnchorElement>,
     target: string | number,
   ) => {
     if (pathname === "/") {
       e.preventDefault();
-      // Si el target es 0, forzamos "top: 0", si no, vamos al ID con un pequeño offset si es necesario
-      lenis?.scrollTo(target, { offset: typeof target === "string" ? -50 : 0 });
+      // CORRECCIÓN: Offset en 0 para que llegue al borde exacto.
+      // El navbar es flotante y tiene fondo cristal, queda bien superpuesto.
+      lenis?.scrollTo(target, { offset: 0 });
     }
   };
 
@@ -47,7 +47,6 @@ export default function Navbar() {
       transition={{ duration: 0.35, ease: "easeInOut" }}
     >
       <nav className={`navbar_pill ${scrolled ? "scrolled" : ""}`}>
-        {/* LOGO: Ahora manda al pixel 0 (Tope absoluto) */}
         <Link
           href="/#hero"
           className="nav_logo_wrapper"

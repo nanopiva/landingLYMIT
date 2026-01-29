@@ -262,6 +262,10 @@
     margin-top: 15px;
   }
 
+  .card_tags_container {
+    margin-top: 20px;
+  }
+
   /* GALERÍA / SLIDER */
   .card_image_column {
     width: 100%;

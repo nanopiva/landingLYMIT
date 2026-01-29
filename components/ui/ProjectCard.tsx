@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
 import "@/styles/sections/projects.css";
+import AnimatedCopy from "./AnimatedCopy";
 
 interface CardProps {
   i: number;
@@ -69,8 +70,9 @@ export default function ProjectCard({
               <span className="card_category_label">{category}</span>
               <h2 className="card_title_desktop">{title}</h2>
             </div>
-
-            <p className="card_description">{description}</p>
+            <AnimatedCopy colorFinal="#666666" triggerEnd="top 60%">
+              <p className="card_description">{description}</p>
+            </AnimatedCopy>
 
             <div className="card_tags_container">
               {tags.map((tag, idx) => (

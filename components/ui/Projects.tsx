@@ -19,7 +19,7 @@ const projects = [
     // CAMBIO: Opacidad subida a 0.97 (Casi sólido para no ver lo de atrás)
     color: "rgba(240, 240, 242, 0.97)",
     category: "E-commerce Tech",
-    tags: ["Next.js", "Stripe", "Dashboard"],
+    tags: ["Wordpress", "Stripe", "Dashboard"],
   },
   {
     title: "Luna Mendoza",
@@ -67,7 +67,7 @@ const projects = [
     // CAMBIO: 0.97
     color: "rgba(225, 228, 230, 0.97)",
     category: "Sitio Corporativo",
-    tags: ["Legal Tech", "CMS", "SEO"],
+    tags: ["Diseño Profesional", "Página multi-rutas", "SEO"],
   },
 ];
 

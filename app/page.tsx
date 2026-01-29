@@ -75,7 +75,7 @@ export default function Home() {
       <section id="servicios" className="separator_section">
         <div className="separator_content">
           <h2>Servicios</h2>
-          <AnimatedCopy colorFinal="#a1a1a6">
+          <AnimatedCopy colorFinal="#a1a1a6" triggerEnd="top 70%">
             <p>
               Desde experiencias web hasta automatizaciones con IA: herramientas
               reales para problemas actuales.
@@ -95,7 +95,7 @@ export default function Home() {
       <section id="contacto" className="separator_section">
         <div className="separator_content">
           <h2>Contacto</h2>
-          <AnimatedCopy colorFinal="#a1a1a6">
+          <AnimatedCopy colorFinal="#a1a1a6" triggerEnd="top 60%">
             <p>
               Estamos para escucharte. Contanos qué necesita tu negocio hoy y
               busquemos juntos la mejor forma de resolverlo.
