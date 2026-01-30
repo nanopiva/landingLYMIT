@@ -1,7 +1,9 @@
+/* styles/sections/footer.css */
+
 /* --- FOOTER PRINCIPAL --- */
 .footer_section {
   width: 100%;
-  background-color: #0e0e0c; /* Negro suave / Carbono */
+  background-color: #0e0e0c;
   color: #fff;
   padding: 80px 20px 40px 20px;
   position: relative;
@@ -29,7 +31,6 @@
 .footer_brand {
   display: flex;
   flex-direction: column;
-  /* Alineación central absoluta */
   align-items: center;
   text-align: center;
   gap: 5px;
@@ -37,30 +38,28 @@
 }
 
 .logo_wrapper {
-  /* Contenedor para controlar el área del hover */
   display: inline-block;
   cursor: pointer;
 }
 
 .footer_logo_img {
-  height: 150px; /* Tamaño equilibrado */
+  height: 150px;
   width: auto;
   display: block;
   object-fit: contain;
-
-  /* Transiciones suaves "Premium" */
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
-
-  /* Inicio sin filtros */
-  filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  transition:
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    filter 0.4s ease;
+  filter: drop-shadow(
+    0 0 0 rgba(82, 113, 255, 0)
+  ); /* Azul transparente inicial */
 }
 
-/* ANIMACIÓN HOVER LOGO */
+/* ANIMACIÓN HOVER LOGO (Toque azulado suave) */
 .logo_wrapper:hover .footer_logo_img {
-  /* Escala sutil */
-  transform: scale(1.08);
-  /* Resplandor blanco suave detrás del logo */
-  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+  transform: scale(1.05);
+  /* Resplandor azul sutil (#5271ff) en lugar de blanco */
+  filter: drop-shadow(0 0 20px rgba(82, 113, 255, 0.3));
 }
 
 .brand_tagline {
@@ -69,16 +68,14 @@
   color: #888;
   line-height: 1.4;
   margin: 0;
-  letter-spacing: 0.02em; /* Un poco de aire entre letras para elegancia */
+  letter-spacing: 0.02em;
   font-weight: 400;
   transform: translateY(-20px);
-  /* Transición sutil al hacer hover en el contenedor padre */
   transition: color 0.3s ease;
 }
 
-/* Efecto opcional: El texto se ilumina un poco cuando tocas el logo */
 .footer_brand:hover .brand_tagline {
-  color: #aaa;
+  color: #bbb;
 }
 
 /* --- NAVEGACIÓN --- */
@@ -91,14 +88,14 @@
 .footer_col {
   display: flex;
   flex-direction: column;
-  gap: 24px; /* Más espacio entre título y lista */
+  gap: 24px;
 }
 
 .col_title {
   font-family: var(--inter), sans-serif;
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.15em; /* Tracking amplio estilo editorial */
+  letter-spacing: 0.15em;
   color: #555;
   font-weight: 700;
 }
@@ -112,7 +109,7 @@
   gap: 14px;
 }
 
-/* Links con animación de subrayado */
+/* Links con animación */
 .footer_link_item {
   position: relative;
   font-family: var(--inter), sans-serif;
@@ -123,8 +120,9 @@
   transition: color 0.3s ease;
 }
 
+/* Hover Azul en Texto */
 .footer_link_item:hover {
-  color: #fff;
+  color: #fff; /* O puedes ponerlo azul (#5271ff) si quieres ser más agresivo */
 }
 
 .link_underline {
@@ -132,8 +130,11 @@
   bottom: -2px;
   left: 0;
   width: 100%;
-  height: 1px;
-  background-color: #fff;
+  height: 2px; /* Un poco más grueso para que se vea el color */
+
+  /* CAMBIO: Subrayado Azul Eléctrico */
+  background-color: #5271ff;
+
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -163,19 +164,20 @@
   transition: all 0.3s ease;
 }
 
+/* Hover Azul en Iconos Sociales */
 .social_btn:hover {
-  background-color: #fff;
-  color: #000;
-  border-color: #fff;
+  background-color: #5271ff; /* Fondo Azul */
+  color: #fff; /* Icono Blanco */
+  border-color: #5271ff;
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 5px 15px rgba(82, 113, 255, 0.3); /* Sombra azulada */
 }
 
 /* --- DIVIDER --- */
 .footer_divider {
   width: 100%;
   height: 1px;
-  background-color: #1a1a1a; /* Muy sutil */
+  background-color: #1a1a1a;
   margin-bottom: 30px;
 }
 
@@ -203,19 +205,17 @@
 }
 
 .footer_email_link:hover {
-  color: #fff;
-  text-decoration: underline;
+  color: #5271ff; /* Email cambia a azul al pasar el mouse */
+  text-decoration: none;
 }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
   .footer_top {
     flex-direction: column;
-    align-items: flex-start; /* En móvil queda mejor alineado a la izquierda o centro global */
+    align-items: flex-start;
     gap: 50px;
   }
-
-  /* En móvil, a veces queda mejor centrar todo */
   .footer_brand {
     align-items: flex-start;
     text-align: left;
@@ -224,18 +224,15 @@
 
 @media (max-width: 600px) {
   .footer_brand {
-    /* Centramos en móviles pequeños */
     align-items: center;
     text-align: center;
     margin: 0 auto;
   }
-
   .footer_nav_wrapper {
     width: 100%;
     justify-content: space-between;
     gap: 30px;
   }
-
   .footer_bottom {
     flex-direction: column-reverse;
     align-items: center;

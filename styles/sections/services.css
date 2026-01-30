@@ -100,11 +100,23 @@
 
 .feature_tag {
   font-family: var(--inter), sans-serif;
-  font-size: 0.9rem;
-  padding: 8px 16px;
-  border: 1px solid #e5e5e5;
+  font-size: 13px; /* Mismo tamaño que projects */
+  font-weight: 500;
+  padding: 8px 18px;
   border-radius: 100px;
-  color: var(--text-primary);
+
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(82, 113, 255, 0.15); /* Borde azul muy suave */
+  color: #2a3b8f; /* Texto azul oscuro técnico */
+
+  transition: all 0.3s ease;
+}
+
+/* Efecto Hover opcional para dar vida */
+.feature_tag:hover {
+  background-color: rgba(82, 113, 255, 0.05);
+  border-color: #5271ff;
+  color: #5271ff;
 }
 
 /* --- MOBILE OPTIMIZATION (Lista Vertical Natural) --- */

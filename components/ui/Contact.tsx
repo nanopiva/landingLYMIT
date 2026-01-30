@@ -31,8 +31,11 @@ const iconHoverVariants: Variants = {
   rest: { scale: 1, backgroundColor: "#f5f5f7", color: "#000" },
   hover: {
     scale: 1.1,
-    backgroundColor: "#000",
+
+    /* CAMBIO: Fondo Azul Eléctrico en vez de Negro */
+    backgroundColor: "#5271ff",
     color: "#fff",
+
     rotate: -5,
     transition: { duration: 0.3 },
   },

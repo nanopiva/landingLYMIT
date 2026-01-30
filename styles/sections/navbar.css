@@ -1,3 +1,5 @@
+/* styles/sections/navbar.css */
+
 /* --- WRAPPER FIJO --- */
 .navbar_fixed_wrapper {
   position: fixed;
@@ -17,17 +19,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  /* Dimensiones Ajustadas */
   width: 100%;
-  /* Reducido de 500px a 400px ya que no hay botón CTA */
   max-width: 400px;
   height: 54px;
-
-  /* CAMBIO: Padding simétrico ahora que no hay botón */
   padding: 5px 30px;
 
-  /* Estética Cristal */
   background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -39,7 +35,13 @@
     0 4px 6px -1px rgba(0, 0, 0, 0.02),
     0 10px 15px -3px rgba(0, 0, 0, 0.03);
 
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* DETALLE: Borde azul sutil al pasar el mouse por la navbar completa */
+.navbar_pill:hover {
+  border-color: rgba(82, 113, 255, 0.2);
+  box-shadow: 0 10px 30px -5px rgba(82, 113, 255, 0.08);
 }
 
 .navbar_pill.scrolled {
@@ -48,75 +50,85 @@
   border-color: rgba(0, 0, 0, 0.08);
 }
 
-/* --- ELEMENTOS --- */
-
+/* --- LOGO --- */
 .nav_logo_wrapper {
   display: flex;
-  align-items: center; /* Centra verticalmente el contenido */
+  align-items: center;
   justify-content: center;
   margin-right: auto;
-  height: 100%; /* Ocupa toda la altura del navbar */
+  height: 100%;
   text-decoration: none;
-
-  /* Opcional: Si sientes que está muy pegado al borde izquierdo, dale un margen */
-  /* margin-left: 5px; */
+  cursor: pointer;
 }
 
 .nav_logo_img {
-  /* TAMAÑO Y AJUSTES BASE */
   height: 72px;
   width: auto;
   display: block;
   object-fit: contain;
-
-  /* Posición Base */
   transform: translateY(5px);
-
-  /* --- NUEVO: TRANSICIÓN SUAVE (PREMIUM FEEL) --- */
-  /* Usamos un cubic-bezier para que arranque rápido y frene suave */
   transition:
     transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     filter 0.4s ease;
-
-  /* Optimización de rendimiento para animaciones */
   will-change: transform;
 }
 
-/* ESTADO HOVER: Efecto de "Levitación" */
+/* HOVER LOGO: Resplandor Azul */
 .nav_logo_wrapper:hover .nav_logo_img {
-  /* Escala sutil (1.05 es más elegante que 1.1) */
-  /* Mantenemos el translateY(5px) original para no saltar */
   transform: translateY(5px) scale(1.08);
-
-  /* Sombra difusa suave */
-  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.12));
+  /* Sombra azul suave (#5271ff) */
+  filter: drop-shadow(0 8px 15px rgba(82, 113, 255, 0.25));
 }
 
-/* ESTADO CLICK: Efecto de "Pulsación" al presionar */
 .nav_logo_wrapper:active .nav_logo_img {
-  /* Se achica un poco para dar feedback táctil */
   transform: translateY(5px) scale(0.95);
-  transition: transform 0.1s ease-out; /* Reacción rápida al click */
 }
 
+/* --- LINKS DE NAVEGACIÓN --- */
 .nav_links {
   display: flex;
   align-items: center;
   gap: 24px;
-  /* Eliminamos márgenes extra innecesarios */
 }
 
-.nav_link {
+/* Estilo del contenedor del link */
+.nav_link_item {
+  position: relative;
   font-family: var(--inter), sans-serif;
   font-size: 0.9rem;
   color: #555;
   font-weight: 500;
-  transition: color 0.2s ease;
   text-decoration: none;
+  display: inline-block;
+  padding: 4px 0;
+  transition: color 0.3s ease;
 }
 
-.nav_link:hover {
+/* CAMBIO: El texto se pone NEGRO (no azul) al hacer hover, para mantener la sobriedad */
+.nav_link_item:hover {
   color: #000;
+}
+
+/* SUBRAYADO (Este sí se queda AZUL) */
+.nav_link_underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+
+  /* El toque de color */
+  background-color: #5271ff;
+  border-radius: 2px;
+
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav_link_item:hover .nav_link_underline {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 /* --- RESPONSIVE --- */
@@ -125,13 +137,10 @@
     max-width: 90vw;
     padding: 5px 24px;
   }
-
-  /* Opcional: En móvil quizás quieras mostrar solo el logo o un menú hamburguesa si hay muchos links */
   .nav_links {
     gap: 16px;
   }
-
-  .nav_link {
+  .nav_link_item {
     font-size: 0.8rem;
   }
 }

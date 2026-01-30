@@ -10,7 +10,7 @@ const projects = [
     description:
       "Desarrollo integral de e-commerce para tienda de tecnología. Integración de pagos, gestión de stock en tiempo real y panel de administración.",
     gallery: [
-      "/project1-1.jpeg",
+      "/project1-1.png",
       "/project1-2.png",
       "/project1-3.png",
       "/project1-4.png",

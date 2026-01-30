@@ -67,7 +67,10 @@
 
     .cta_btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+      /* Sombra azulada en vez de negra pura */
+      box-shadow: 0 15px 30px -5px rgba(82, 113, 255, 0.3);
+      background-color: #1a1a1a; /* Un gris muy oscuro en vez de negro total */
+      border: 1px solid rgba(82, 113, 255, 0.3); /* Borde sutil */
     }
   }
 }
