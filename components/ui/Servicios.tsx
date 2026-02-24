@@ -4,9 +4,17 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import Lottie from "lottie-react";
+
+// 1. IMPORTAR TODAS LAS ANIMACIONES
+import webAnimation from "@/app/lotties/web.json";
+import commerceAnimation from "@/app/lotties/commerce.json";
+import automationAnimation from "@/app/lotties/automation.json";
+import softwareAnimation from "@/app/lotties/software.json";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+// 2. ARRAY DE SERVICIOS ACTUALIZADO CON LOTTIES
 const services = [
   {
     id: "01",
@@ -14,7 +22,7 @@ const services = [
     description:
       "La primera impresión de tu negocio entra por los ojos. Diseñamos sitios web elegantes y fáciles de navegar que reflejan la calidad de tu trabajo y generan la confianza necesaria para que te elijan.",
     tags: ["Landing Pages", "Sitios Corporativos", "3D WebGL", "SEO Técnico"],
-    image: "/modern-web.png",
+    animationData: webAnimation,
   },
   {
     id: "02",
@@ -27,7 +35,7 @@ const services = [
       "WooCommerce",
       "Analítica de Ventas",
     ],
-    image: "/e-commerce.png",
+    animationData: commerceAnimation,
   },
   {
     id: "03",
@@ -40,7 +48,7 @@ const services = [
       "Chatbots GPT-4",
       "Reducción de Costos",
     ],
-    image: "/ai-automation.png",
+    animationData: automationAnimation,
   },
   {
     id: "04",
@@ -53,7 +61,7 @@ const services = [
       "Cloud Architecture",
       "Bases de Datos",
     ],
-    image: "/software-architecture.png",
+    animationData: softwareAnimation,
   },
 ];
 
@@ -177,20 +185,18 @@ export default function Servicios() {
       };
 
       // 4. ANIMACIÓN SCROLL-DRIVEN PARA LA PRIMERA TARJETA
-      // En lugar de un tween automático, usamos ScrollTrigger con 'scrub'.
-      // Esto conecta la animación directamente a la barra de scroll.
       ScrollTrigger.create({
         trigger: wrapper,
-        start: "top 60%", // Empieza a pintarse cuando la sección entra en pantalla
-        end: "top top", // Termina de pintarse cuando la sección se ancla
-        scrub: 1, // Vital: Si subes, la animación retrocede (borra el texto)
+        start: "top 60%",
+        end: "top top",
+        scrub: 1,
         onUpdate: (self) => {
           animateText(0, self.progress);
         },
       });
 
       // 5. TIMELINE PRINCIPAL (Cards 2, 3, 4)
-      const scrollDistance = (cards.length - 1) * 60; // Distancia original (rápida)
+      const scrollDistance = (cards.length - 1) * 60;
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -216,7 +222,6 @@ export default function Servicios() {
               yPercent: 0,
               onUpdate: function () {
                 const rawProgress = this.progress();
-                // Ajuste de timing para que empiece a escribir un poco después de aparecer
                 const startThreshold = 0.35;
                 let textProgress = 0;
 
@@ -277,12 +282,16 @@ export default function Servicios() {
             </div>
           </div>
 
+          {/* Renderizado del componente Lottie */}
           <div className="service_image_wrapper">
-            <img
-              src={service.image}
-              alt={service.title}
-              className="service_image"
-            />
+            {service.animationData && (
+              <Lottie
+                animationData={service.animationData}
+                loop={true}
+                autoplay={true}
+                className="service_image"
+              />
+            )}
           </div>
         </div>
       ))}
