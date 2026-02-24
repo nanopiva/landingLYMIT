@@ -1,4 +1,5 @@
-/* --- SECCIÓN PRINCIPAL --- */
+/* --- CSS CORREGIDO --- */
+
 .contact_section {
   position: relative;
   width: 100%;
@@ -11,31 +12,24 @@
 
 .contact_container {
   width: 100%;
-  /* CAMBIO: Ancho grande, igual que Projects */
-  max-width: 95vw;
-  /* Mantenemos un límite lógico para pantallas ultrawide */
-  width: 1300px;
-
+  max-width: 1300px;
   display: grid;
-  /* Ajusté un poco la proporción para dar más aire al formulario */
   grid-template-columns: 1fr 1fr;
-  gap: 100px; /* Más separación entre columnas */
-  align-items: stretch; /* Estira ambas columnas para que midan lo mismo de alto */
+  gap: 100px;
+  align-items: stretch;
   padding: 0 20px;
 }
 
-/* --- COLUMNA INFORMACIÓN --- */
 .contact_info_col {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrado vertical del contenido */
+  justify-content: center;
 }
 
 .contact_header {
   margin-bottom: 4rem;
 }
 
-/* ... (Títulos y Subtítulos se mantienen igual) ... */
 .contact_subtitle {
   font-family: var(--inter), sans-serif;
   font-size: 0.8rem;
@@ -48,7 +42,7 @@
 
 .contact_title {
   font-family: var(--apple-garamond), serif;
-  font-size: clamp(3rem, 5vw, 4.5rem); /* Título un poco más grande */
+  font-size: clamp(3rem, 5vw, 4.5rem);
   line-height: 1;
   color: var(--text-primary);
   margin-bottom: 2rem;
@@ -62,21 +56,20 @@
   max-width: 500px;
 }
 
-/* Detalles de contacto */
 .contact_details {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem; /* Más espacio entre items */
+  gap: 2.5rem;
 }
 
 .detail_item {
   display: flex;
-  gap: 25px; /* Más espacio entre icono y texto */
+  gap: 25px;
   align-items: flex-start;
 }
 
 .icon_circle {
-  width: 50px; /* Circulo un poco más grande */
+  width: 50px;
   height: 50px;
   border-radius: 50%;
   background-color: #f5f5f7;
@@ -87,25 +80,18 @@
   flex-shrink: 0;
 }
 
-.detail_text_wrapper {
-  display: flex;
-  flex-direction: column;
-  /* Esto ayuda a que el titulo no pegue con los numeros */
-}
-
 .detail_item h3 {
   font-family: var(--inter), sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: #000;
-  /* CAMBIO: Más espacio abajo del título "WhatsApp" */
   margin-bottom: 12px;
 }
 
 .detail_item p,
 .detail_link {
   font-family: var(--inter), sans-serif;
-  font-size: 1.1rem; /* Texto un poco más grande */
+  font-size: 1.1rem;
   color: #555;
   text-decoration: none;
   transition: color 0.2s;
@@ -124,16 +110,13 @@
 .phones_grid {
   display: flex;
   flex-direction: column;
-  /* CAMBIO: Más espacio entre los números */
   gap: 8px;
 }
 
-/* --- COLUMNA FORMULARIO --- */
 .contact_form_col {
   background-color: #fff;
   padding: 60px;
   border-radius: 20px;
-  /* Sombra más amplia para el ancho grande */
   box-shadow: 0 20px 80px rgba(0, 0, 0, 0.06);
   border: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
@@ -144,24 +127,22 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  height: 100%; /* Ocupa toda la altura disponible */
+  height: 100%;
 }
 
-/* Footer del form (Botón) */
 .form_footer {
-  /* CAMBIO: Empuja el botón hacia abajo para alinear visualmente */
   margin-top: auto;
   padding-top: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Alineado a la izquierda, no centrado */
+  align-items: center;
 }
 
-/* ... (Inputs animados se mantienen igual) ... */
 .input_group {
   position: relative;
   padding-top: 15px;
 }
+
 .form_input {
   width: 100%;
   background: transparent;
@@ -173,9 +154,11 @@
   outline: none;
   resize: none;
 }
+
 .textarea {
-  min-height: 150px; /* Textarea más alto */
+  min-height: 150px;
 }
+
 .floating_label {
   position: absolute;
   left: 0;
@@ -189,13 +172,16 @@
   align-items: center;
   gap: 10px;
 }
+
+/* --- ESTADO ACTIVO --- */
 .input_group.active .floating_label {
   top: -5px;
   font-size: 0.85rem;
-  color: #000;
+  color: #1a1a1a; /* TEXTO NEGRO/GRIS, NO AZUL */
   font-weight: 600;
   text-transform: uppercase;
 }
+
 .input_border_base {
   position: absolute;
   bottom: 0;
@@ -204,38 +190,25 @@
   height: 1px;
   background-color: #e5e5e5;
 }
+
 .input_border_active {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 2px;
-
-  /* CAMBIO: De negro (#000) a Azul Eléctrico (#5271ff) */
-  background-color: #5271ff;
-
+  background-color: #5271ff; /* LÍNEA AZUL */
   transform-origin: left;
-  box-shadow: 0 0 10px rgba(82, 113, 255, 0.2); /* Pequeño brillo */
+  box-shadow: 0 0 10px rgba(82, 113, 255, 0.2);
 }
 
-/* También actualizamos el label flotante cuando está activo */
-.input_group.active .floating_label {
-  top: -5px;
-  font-size: 0.85rem;
+/* --- CSS CORREGIDO DEL BOTÓN --- */
 
-  /* CAMBIO: Texto azul cuando está activo */
-  color: #5271ff;
-
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-/* --- BOTÓN SUBMIT --- */
 .submit_btn {
   background-color: #000;
   color: #fff;
   border: none;
-  padding: 20px 40px; /* Botón más grande */
+  padding: 20px 40px;
   border-radius: 100px;
   font-family: var(--inter), sans-serif;
   font-size: 1.1rem;
@@ -248,66 +221,34 @@
   transition:
     transform 0.2s,
     background-color 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
 .submit_btn:hover {
-  background-color: #5271ff; /* Azul eléctrico */
+  /* CAMBIO: Color negro más claro para el hover, sin azul */
+  background-color: #1a1a1a;
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(82, 113, 255, 0.25); /* Sombra azulada */
+  /* Sombra neutra y discreta */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .submit_btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
-.error_msg {
-  color: #e00;
-  font-size: 0.9rem;
-  font-family: var(--inter);
-  margin-top: 15px;
-}
-
-/* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
-  .contact_subtitle {
-    margin-top: 20px;
-  }
   .contact_container {
     grid-template-columns: 1fr;
     gap: 60px;
-    width: 100%;
-    max-width: 100%;
     padding: 0 20px;
   }
-
   .contact_form_col {
     padding: 30px;
   }
-
-  .contact_info_col {
-    align-items: center;
-    text-align: center;
-  }
-
-  .contact_details {
-    align-items: center;
-    text-align: left; /* Detalles alineados a la izq interna */
-    width: 100%;
-    max-width: 400px;
-  }
-
-  .detail_item {
-    width: 100%;
-  }
-
-  .form_footer {
-    align-items: center; /* En móvil centramos el botón */
-    margin-top: 2rem;
-  }
-
   .submit_btn {
-    width: 100%; /* Botón ancho completo en móvil */
+    width: 100%;
   }
 }

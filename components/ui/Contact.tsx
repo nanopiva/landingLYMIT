@@ -5,8 +5,7 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { MapPin, Mail, Send, User, MessageSquare, AtSign } from "lucide-react";
 import AnimatedCopy from "./AnimatedCopy";
 
-// --- VARIANTES DE ANIMACIÓN (Framer Motion) ---
-// Mantenemos estas animaciones porque son de entrada y no afectan el scroll
+// --- VARIANTES DE ANIMACIÓN ---
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -31,11 +30,8 @@ const iconHoverVariants: Variants = {
   rest: { scale: 1, backgroundColor: "#f5f5f7", color: "#000" },
   hover: {
     scale: 1.1,
-
-    /* CAMBIO: Fondo Azul Eléctrico en vez de Negro */
-    backgroundColor: "#5271ff",
+    backgroundColor: "#5271ff", // El icono sí mantiene el azul de marca en el hover lateral
     color: "#fff",
-
     rotate: -5,
     transition: { duration: 0.3 },
   },
@@ -57,7 +53,6 @@ export default function Contact() {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  // --- AQUÍ ESTÁ EL CAMBIO IMPORTANTE ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
@@ -65,17 +60,13 @@ export default function Contact() {
     try {
       const response = await fetch("/api/send", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formState),
       });
 
       if (response.ok) {
         setStatus("success");
-        setFormState({ name: "", email: "", message: "" }); // Limpiamos inputs
-
-        // Volvemos al estado inicial después de 5 seg para permitir otro envío
+        setFormState({ name: "", email: "", message: "" });
         setTimeout(() => setStatus("idle"), 5000);
       } else {
         setStatus("error");
@@ -105,7 +96,7 @@ export default function Contact() {
           <motion.div className="contact_header" variants={itemVariants}>
             <span className="contact_subtitle">Hablemos</span>
             <h2 className="contact_title">Mejoremos tu presencia digital.</h2>
-            <AnimatedCopy colorFinal="#666666">
+            <AnimatedCopy colorFinal="#666666" triggerEnd="top 85%">
               <p className="contact_description">
                 Estamos listos para escalar tu negocio. Contanos sobre tu
                 proyecto y descubrí cómo podemos potenciarlo.
@@ -114,7 +105,6 @@ export default function Contact() {
           </motion.div>
 
           <div className="contact_details">
-            {/* Ubicación */}
             <motion.div className="detail_item" variants={itemVariants}>
               <motion.div
                 className="icon_circle"
@@ -126,17 +116,17 @@ export default function Contact() {
               </motion.div>
               <div className="detail_text_wrapper">
                 <h3>Ubicación</h3>
-
-                <AnimatedCopy colorFinal="#666666" triggerEnd="top 60%">
+                <AnimatedCopy colorFinal="#666666" triggerEnd="top 85%">
                   <p>Santa Fe, Argentina</p>
                 </AnimatedCopy>
-                <span className="detail_note">
-                  (Trabajamos de forma remota con alcance global)
-                </span>
+                <AnimatedCopy colorFinal="#666666" triggerEnd="top 85%">
+                  <span className="detail_note">
+                    (Trabajamos de forma remota con alcance global)
+                  </span>
+                </AnimatedCopy>
               </div>
             </motion.div>
 
-            {/* Email */}
             <motion.div className="detail_item" variants={itemVariants}>
               <motion.div
                 className="icon_circle"
@@ -148,7 +138,7 @@ export default function Contact() {
               </motion.div>
               <div className="detail_text_wrapper">
                 <h3>Email</h3>
-                <AnimatedCopy colorFinal="#666666" triggerEnd="top 80%">
+                <AnimatedCopy colorFinal="#666666" triggerEnd="top 85%">
                   <a
                     href="mailto:contact@lymitsolutions.com"
                     className="detail_link"
@@ -159,7 +149,6 @@ export default function Contact() {
               </div>
             </motion.div>
 
-            {/* WhatsApp */}
             <motion.div className="detail_item" variants={itemVariants}>
               <motion.div
                 className="icon_circle"
@@ -172,7 +161,7 @@ export default function Contact() {
               <div className="detail_text_wrapper">
                 <h3>WhatsApp</h3>
                 <div className="phones_grid">
-                  <AnimatedCopy colorFinal="#666666" triggerEnd="top 80%">
+                  <AnimatedCopy colorFinal="#666666" triggerEnd="top 85%">
                     <a
                       href="https://wa.me/5493425364800"
                       target="_blank"
@@ -181,7 +170,7 @@ export default function Contact() {
                       +54 9 (342) 536-4800
                     </a>
                   </AnimatedCopy>
-                  <AnimatedCopy colorFinal="#666666" triggerEnd="top 80%">
+                  <AnimatedCopy colorFinal="#666666" triggerEnd="top 85%">
                     <a
                       href="https://wa.me/5491123957675"
                       target="_blank"
@@ -207,7 +196,6 @@ export default function Contact() {
               onChange={handleChange}
               icon={<User size={18} />}
             />
-
             <FloatingInput
               label="Tu Correo Electrónico"
               name="email"
@@ -216,7 +204,6 @@ export default function Contact() {
               onChange={handleChange}
               icon={<AtSign size={18} />}
             />
-
             <FloatingInput
               label="Contanos sobre tu proyecto"
               name="message"
@@ -231,7 +218,8 @@ export default function Contact() {
                 type="submit"
                 className="submit_btn"
                 disabled={status === "loading"}
-                whileHover={{ scale: 1.02, backgroundColor: "#222" }}
+                // CAMBIO: Background color a un negro más claro (#1a1a1a) sin celeste
+                whileHover={{ scale: 1.02, backgroundColor: "#1a1a1a" }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -267,7 +255,6 @@ export default function Contact() {
                   )}
                 </AnimatePresence>
               </motion.button>
-
               {status === "error" && (
                 <motion.p
                   className="error_msg"
@@ -284,8 +271,6 @@ export default function Contact() {
     </section>
   );
 }
-
-// --- SUBCOMPONENTES ---
 
 function WhatsAppIcon() {
   return (
@@ -340,7 +325,7 @@ function FloatingInput({
         <motion.span
           className="label_icon"
           animate={{
-            color: isFocused ? "#000" : "#999",
+            color: isFocused ? "#5271ff" : "#999",
             scale: isFocused ? 1.1 : 1,
           }}
         >

@@ -21,7 +21,12 @@ const services = [
     title: "Páginas Web",
     description:
       "La primera impresión de tu negocio entra por los ojos. Diseñamos sitios web elegantes y fáciles de navegar que reflejan la calidad de tu trabajo y generan la confianza necesaria para que te elijan.",
-    tags: ["Landing Pages", "Sitios Corporativos", "3D WebGL", "SEO Técnico"],
+    tags: [
+      "Landing Pages",
+      "Sitios Corporativos",
+      "Web Performance",
+      "SEO Técnico",
+    ],
     animationData: webAnimation,
   },
   {
@@ -29,12 +34,7 @@ const services = [
     title: "E-commerce",
     description:
       "Creamos una experiencia de compra fluida desde el primer clic hasta el pago final. Implementamos pasarelas seguras y sistemas de gestión que te permiten administrar tus ventas de forma simple, garantizando que el proceso sea profesional tanto para vos como para tu cliente.",
-    tags: [
-      "E-commerce",
-      "Shopify Experts",
-      "WooCommerce",
-      "Analítica de Ventas",
-    ],
+    tags: ["E-commerce", "Wordpress", "Gestión de Stock", "Pagos Integrados"],
     animationData: commerceAnimation,
   },
   {
@@ -56,10 +56,10 @@ const services = [
     description:
       "Cuando las soluciones estándar no se ajustan a tu forma de trabajar, desarrollamos herramientas que sí lo hacen. Creamos software diseñado específicamente para tus procesos internos, asegurando que la tecnología se adapte a tu negocio.",
     tags: [
-      "SaaS Development",
+      "Gestión de Inventarios",
+      "Autogestión",
+      "Digitalización de Procesos",
       "Web Apps",
-      "Cloud Architecture",
-      "Bases de Datos",
     ],
     animationData: softwareAnimation,
   },
