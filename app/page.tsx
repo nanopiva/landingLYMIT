@@ -58,7 +58,27 @@ export default function Home() {
       {/* HERO */}
       <section id="hero" className="hero_main">
         <div className="content">
-          <h1>Modernizá tu forma de trabajar</h1>
+          <h1>
+            {/* Texto oculto para SEO y Accesibilidad */}
+            <span
+              style={{
+                position: "absolute",
+                width: "1px",
+                height: "1px",
+                padding: 0,
+                margin: "-1px",
+                overflow: "hidden",
+                clip: "rect(0, 0, 0, 0)",
+                whiteSpace: "nowrap",
+                borderWidth: 0,
+              }}
+            >
+              LYMIT Solutions - Agencia de Desarrollo de Software y
+              Automatización con IA en Santa Fe.{" "}
+            </span>
+            {/* Texto visual intacto */}
+            Modernizá tu forma de trabajar
+          </h1>
           <p>
             Implementamos soluciones digitales y agentes inteligentes que
             trabajan por vos las 24 horas del día.

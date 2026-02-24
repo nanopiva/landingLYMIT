@@ -1,5 +1,10 @@
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default function TermsPage() {
   return (

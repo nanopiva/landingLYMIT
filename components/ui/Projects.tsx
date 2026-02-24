@@ -56,14 +56,14 @@ const projects = [
   {
     title: "Lumen Store",
     description:
-      "Catálogo digital autogestionable. Demo técnica de una tienda en línea equipada con un panel de control propio, permitiendo al dueño cargar y administrar productos fácilmente sin necesidad de saber programar.",
+      "Comercio electrónico autogestionable. Demo técnica de una tienda equipada con un panel de control propio, permitiendo al dueño cargar y administrar productos fácilmente.",
     gallery: [
       "/project1-1.png",
       "/project1-2.png",
       "/project1-3.png",
       "/project1-4.png",
     ],
-    link: "https://lumen-demo-link.com", // Cambiar por el enlace real a tu Vercel
+    link: "https://lumen-phi-nine.vercel.app", // Cambiar por el enlace real a tu Vercel
     // Color 4: El más oscuro para asentar el fondo
     color: "rgba(225, 228, 230, 0.97)",
     category: "Concepto E-commerce",

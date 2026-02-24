@@ -51,11 +51,19 @@ export default function Navbar() {
           href="/#hero"
           className="nav_logo_wrapper"
           onClick={(e) => handleScrollLink(e, 0)}
+          aria-label="Ir al inicio - LYMIT Solutions"
         >
-          <img src={LYMITLogo.src} alt="LYMIT" className="nav_logo_img" />
+          {/* SEO Opt: Alt descriptivo y dimensiones para evitar CLS */}
+          <img
+            src={LYMITLogo.src}
+            alt="Logotipo de LYMIT Solutions - Agencia de Desarrollo Web y Automatización"
+            className="nav_logo_img"
+            width="120"
+            height="40"
+          />
         </Link>
 
-        {/* LINKS DE NAVEGACIÓN (Con estructura para animación) */}
+        {/* LINKS DE NAVEGACIÓN */}
         <div className="nav_links">
           <NavLink
             href="/#servicios"
@@ -78,7 +86,6 @@ export default function Navbar() {
   );
 }
 
-// Subcomponente para encapsular la animación del link
 function NavLink({
   href,
   label,

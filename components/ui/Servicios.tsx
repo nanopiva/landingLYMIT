@@ -4,9 +4,14 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic"; // 1. Importamos Next Dynamic
 
-// 1. IMPORTAR TODAS LAS ANIMACIONES
+// 2. Importamos Lottie dinámicamente para no bloquear el renderizado inicial
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false, // Lottie no necesita renderizarse en el servidor
+});
+
+// IMPORTAR TODAS LAS ANIMACIONES
 import webAnimation from "@/app/lotties/web.json";
 import commerceAnimation from "@/app/lotties/commerce.json";
 import automationAnimation from "@/app/lotties/automation.json";
@@ -14,7 +19,7 @@ import softwareAnimation from "@/app/lotties/software.json";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-// 2. ARRAY DE SERVICIOS ACTUALIZADO CON LOTTIES
+// ARRAY DE SERVICIOS ACTUALIZADO CON LOTTIES
 const services = [
   {
     id: "01",
@@ -100,7 +105,6 @@ export default function Servicios() {
       descriptions.forEach((desc, i) => {
         const split = new SplitText(desc, { type: "words,chars" });
         splits.push(split);
-        // Empezamos TODAS en gris (#dddddd)
         gsap.set(split.chars, { color: "#dddddd" });
       });
 
@@ -128,7 +132,6 @@ export default function Servicios() {
 
         const allChars = split.chars;
         const totalChars = allChars.length;
-        // Detectamos dirección comparando con el frame anterior
         const isScrollingDown = progress >= state.lastProgress;
         const currentCharIndex = Math.floor(progress * totalChars);
 
@@ -137,7 +140,6 @@ export default function Servicios() {
         const colorFinal = "#000000";
 
         allChars.forEach((char: Element, charIndex: number) => {
-          // A) Scroll Hacia Arriba (BORRAR/RESET)
           if (!isScrollingDown && charIndex >= currentCharIndex) {
             if (state.timers.has(charIndex)) {
               clearTimeout(state.timers.get(charIndex)!);
@@ -146,13 +148,11 @@ export default function Servicios() {
             state.completed.delete(charIndex);
             state.animating.delete(charIndex);
 
-            // Matamos animaciones en curso y volvemos a GRIS inmediatamente
             gsap.killTweensOf(char);
             gsap.set(char, { color: colorInitial });
             return;
           }
 
-          // B) Scroll Hacia Abajo (ESCRIBIR)
           if (charIndex <= currentCharIndex) {
             if (state.completed.has(charIndex)) {
               gsap.set(char, { color: colorFinal });
@@ -282,8 +282,12 @@ export default function Servicios() {
             </div>
           </div>
 
-          {/* Renderizado del componente Lottie */}
-          <div className="service_image_wrapper">
+          {/* 3. Renderizado del componente Lottie con SEO Semántico */}
+          <div
+            className="service_image_wrapper"
+            role="img"
+            aria-label={`Animación ilustrativa del servicio de ${service.title} de LYMIT Solutions`}
+          >
             {service.animationData && (
               <Lottie
                 animationData={service.animationData}

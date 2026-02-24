@@ -2,7 +2,7 @@
 
 import { Instagram } from "lucide-react";
 import Link from "next/link";
-import { useLenis } from "lenis/react"; // 1. Importamos Lenis
+import { useLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
 import LYMITLogo from "@/public/LYMITWhite.svg";
 
@@ -11,15 +11,11 @@ export default function Footer() {
   const lenis = useLenis();
   const pathname = usePathname();
 
-  // 2. Función de manejo de scroll unificado (igual que Navbar)
   const handleScroll = (e: React.MouseEvent, target: string | number) => {
-    // Si estamos en la home, usamos scroll suave
     if (pathname === "/") {
       e.preventDefault();
-      // Offset 0 para llegar al borde exacto
       lenis?.scrollTo(target, { offset: 0 });
     }
-    // Si estamos en otra página (/privacidad), el Link nativo hará la navegación
   };
 
   return (
@@ -32,12 +28,17 @@ export default function Footer() {
             <Link
               href="/#hero"
               className="logo_wrapper"
-              onClick={(e) => handleScroll(e, 0)} // Scroll al tope absoluto (0px)
+              onClick={(e) => handleScroll(e, 0)}
+              aria-label="Volver al inicio - LYMIT Solutions"
             >
+              {/* SEO Opt: Lazy loading en Footer, Alt descriptivo y dimensiones */}
               <img
                 src={LYMITLogo.src}
-                alt="LYMIT Logo"
+                alt="Logotipo de LYMIT Solutions en blanco"
                 className="footer_logo_img"
+                loading="lazy"
+                width="140"
+                height="45"
               />
             </Link>
             <p className="brand_tagline">Tecnología que piensa.</p>
@@ -49,7 +50,7 @@ export default function Footer() {
               title="Explorar"
               onScroll={handleScroll}
               links={[
-                { name: "Inicio", href: "#hero", targetId: 0 }, // Target numérico para Inicio
+                { name: "Inicio", href: "#hero", targetId: 0 },
                 {
                   name: "Servicios",
                   href: "#servicios",
@@ -60,7 +61,6 @@ export default function Footer() {
               ]}
             />
 
-            {/* Legal no necesita scroll handler porque son páginas nuevas */}
             <FooterColumn
               title="Legal"
               links={[
@@ -77,6 +77,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social_btn"
+                  aria-label="Visitar el perfil de Instagram de LYMIT Solutions"
                 >
                   <Instagram size={20} />
                 </a>
@@ -94,6 +95,7 @@ export default function Footer() {
           <a
             href="mailto:contact@lymitsolutions.com"
             className="footer_email_link"
+            aria-label="Enviar un correo electrónico a LYMIT Solutions"
           >
             contact@lymitsolutions.com
           </a>
@@ -103,7 +105,6 @@ export default function Footer() {
   );
 }
 
-// Subcomponente actualizado para recibir el manejador de scroll
 function FooterColumn({
   title,
   links,
@@ -123,7 +124,6 @@ function FooterColumn({
               href={link.href}
               className="footer_link_item"
               onClick={(e) => {
-                // Solo interceptamos si hay una función onScroll y un target definido
                 if (onScroll && link.targetId !== undefined) {
                   onScroll(e, link.targetId);
                 }

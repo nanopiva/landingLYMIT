@@ -85,7 +85,11 @@ export default function ProjectCard({
 
           <div className="card_image_column">
             {/* Pasamos isMobile como prop para no recalcularlo dentro */}
-            <AccordionGallery items={gallery} isMobile={isMobile} />
+            <AccordionGallery
+              items={gallery}
+              isMobile={isMobile}
+              projectTitle={title}
+            />
           </div>
         </div>
       </motion.div>
@@ -97,9 +101,11 @@ export default function ProjectCard({
 function AccordionGallery({
   items,
   isMobile,
+  projectTitle, // <-- Lo recibimos acá
 }: {
   items: string[];
   isMobile: boolean;
+  projectTitle: string; // <-- Lo definimos en el tipo
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -126,7 +132,7 @@ function AccordionGallery({
             <Image
               src={src}
               fill
-              alt="Project view"
+              alt={`Vista del proyecto ${projectTitle} desarrollado por LYMIT Solutions`}
               className="accordion_img"
               sizes="(max-width: 768px) 85vw, (max-width: 1200px) 50vw, 33vw"
               priority={index === 0}
